@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MasterAi Tech — Independent AI & Computing Intelligence</title>
+<meta name="description" content="MasterAi Tech (@MasterAi.CODE): Independent research, frontier model breakdowns, computer science fundamentals, and developer intelligence.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ── RESET & TOKENS ── */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root {
+  --bg: #060609;
+  --bg-subtle: #0b0b10;
+  --surface: #111117;
+  --surface-elevated: #161620;
+  --surface-hover: #1c1c28;
+  --border: #21212e;
+  --border-focus: #37374d;
+  --text-primary: #ffffff;
+  --text-secondary: #cbd5e1;
+  --text-muted: #64748b;
+  --red-primary: #ef4444;
+  --red-deep: #991b1b;
+  --red-glow: rgba(239, 68, 68, 0.28);
+  --cyan-accent: #38bdf8;
+  --amber-accent: #f59e0b;
+  --emerald-accent: #10b981;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 22px;
+  --radius-xl: 32px;
+  --font-display: 'Plus Jakarta Sans', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  overflow-x: hidden;
+  line-height: 1.6;
+  background-color: var(--bg);
+  min-height: 100vh;
+}
+
+/* ── CRISP HIGH-TECH ATMOSPHERE (ZERO NOISE) ── */
+.grid-bg {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.022) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.022) 1px, transparent 1px);
+  background-size: 56px 56px;
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-orb-top {
+  position: fixed;
+  top: -10%;
+  right: -5%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.14) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+.glow-orb-bottom {
+  position: fixed;
+  bottom: 10%;
+  left: -10%;
+  width: 750px;
+  height: 750px;
+  background: radial-gradient(circle, rgba(153, 27, 27, 0.16) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── COMMAND HUB / TOP BAR ── */
+.top-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(6, 6, 9, 0.88);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 0;
+}
+.header-container {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.brand-unit {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-decoration: none;
+}
+.brand-symbol {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #991b1b, #ef4444);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 18px;
+  letter-spacing: -0.5px;
+  box-shadow: 0 4px 18px var(--red-glow);
+}
+.brand-titles {
+  display: flex;
+  flex-direction: column;
+}
+.brand-name {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+}
+.brand-sub {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--red-primary);
+  letter-spacing: 0.5px;
+}
+
+.status-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 14px;
+  border-radius: 100px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+.status-beacon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--emerald-accent);
+  box-shadow: 0 0 10px var(--emerald-accent);
+  animation: pulse-beacon 2s infinite;
+}
+@keyframes pulse-beacon {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-btn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s var(--ease-out-expo);
+}
+.nav-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.ig-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--red-primary);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  transition: all 0.25s var(--ease-out-expo);
+  box-shadow: 0 4px 18px var(--red-glow);
+}
+.ig-action-btn:hover {
+  background: #f87171;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 24px rgba(239, 68, 68, 0.5);
+}
+
+/* ── CONTAINER ── */
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 28px;
+  position: relative;
+  z-index: 10;
+}
+
+/* ── HERO SECTION ── */
+.hero {
+  padding-top: 150px;
+  padding-bottom: 50px;
+}
+.hero-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 48px;
+  align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  padding: 6px 14px;
+  border-radius: 6px;
+  margin-bottom: 20px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--red-primary);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.hero-h1 {
+  font-family: var(--font-display);
+  font-size: clamp(42px, 5.2vw, 66px);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -2.5px;
+  color: #ffffff;
+  margin-bottom: 22px;
+}
+.hero-h1 .red-text {
+  color: var(--red-primary);
+  background: linear-gradient(135deg, #fca5a5 10%, #ef4444 90%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.hero-subtext {
+  font-size: 20px;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 580px;
+  margin-bottom: 34px;
+}
+.hero-cta-row {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+.btn-solid {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--red-primary);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 16px 32px;
+  border-radius: var(--radius-sm);
+  transition: all 0.25s var(--ease-out-expo);
+  box-shadow: 0 6px 24px var(--red-glow);
+}
+.btn-solid:hover {
+  background: #f87171;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.45);
+}
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 16px 28px;
+  border-radius: var(--radius-sm);
+  transition: all 0.2s var(--ease-out-expo);
+}
+.btn-outline:hover {
+  background: var(--surface-hover);
+  border-color: var(--border-focus);
+}
+
+/* ── HERO VISUAL DUAL SHOWCASE ── */
+.hero-visual-stack {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.hero-img-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s var(--ease-out-expo), border-color 0.3s;
+}
+.hero-img-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--red-primary);
+}
+.hero-img-card.featured-card {
+  grid-column: span 2;
+  height: 250px;
+}
+.hero-img-card.sub-card {
+  height: 180px;
+}
+.hero-img-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.15) brightness(0.85);
+}
+.hero-card-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(8, 8, 12, 0.95) 10%, rgba(8, 8, 12, 0.3) 60%, transparent 100%);
+}
+.hero-card-text {
+  position: absolute;
+  bottom: 16px;
+  left: 18px;
+  right: 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+.hero-card-text h4 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+.hero-card-text p {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  color: var(--red-primary);
+  font-weight: 700;
+}
+.tag-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  background: rgba(255, 255, 255, 0.1);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  backdrop-filter: blur(8px);
+}
+
+/* ── "SEE OUR LATEST STORY ON INSTAGRAM" HERO BANNER ── */
+.story-banner-section {
+  padding: 30px 0 20px;
+}
+.story-banner-card {
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(18, 18, 24, 0.95));
+  border: 1.5px solid rgba(239, 68, 68, 0.35);
+  border-radius: var(--radius-xl);
+  padding: 28px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(239, 68, 68, 0.12);
+  gap: 24px;
+  flex-wrap: wrap;
+  transition: transform 0.3s var(--ease-out-expo), border-color 0.3s;
+}
+.story-banner-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(239, 68, 68, 0.6);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(239, 68, 68, 0.2);
+}
+.story-banner-left {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.story-ring-avatar {
+  position: relative;
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+}
+.story-ring-gradient {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(135deg, #ef4444, #f97316, #d946ef);
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+}
+.story-ring-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: #060609;
+  border: 2.5px solid #060609;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.story-ring-inner span {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: 22px;
+  color: #ffffff;
+}
+.story-live-dot {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #10b981;
+  border: 2.5px solid #060609;
+  box-shadow: 0 0 10px #10b981;
+}
+
+.story-banner-text {
+  display: flex;
+  flex-direction: column;
+}
+.story-banner-badge {
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 800;
+  color: var(--red-primary);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.story-banner-heading {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 900;
+  color: #ffffff;
+  letter-spacing: -0.4px;
+  margin-bottom: 4px;
+}
+.story-banner-sub {
+  font-family: var(--font-body);
+  font-size: 15px;
+  color: var(--text-secondary);
+  max-width: 540px;
+  line-height: 1.45;
+}
+.btn-story-watch {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: 15.5px;
+  font-weight: 800;
+  text-decoration: none;
+  padding: 16px 32px;
+  border-radius: 100px;
+  transition: all 0.25s var(--ease-out-expo);
+  box-shadow: 0 6px 24px var(--red-glow);
+  white-space: nowrap;
+}
+.btn-story-watch:hover {
+  transform: translateY(-2px);
+  background: #f87171;
+  box-shadow: 0 10px 32px rgba(239, 68, 68, 0.5);
+}
+
+/* ── AUTOMATED DYNAMIC POSTS SECTION ── */
+.section {
+  padding: 70px 0;
+}
+.section-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.section-tagline {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--red-primary);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.section-tagline::before {
+  content: '';
+  width: 24px;
+  height: 2px;
+  background: var(--red-primary);
+}
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 900;
+  letter-spacing: -1.5px;
+  color: #ffffff;
+}
+
+/* Filter Controls */
+.filter-tabs {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.filter-btn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 8px 18px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s var(--ease-out-expo);
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--red-primary);
+  border-color: var(--red-primary);
+  color: #ffffff;
+  box-shadow: 0 4px 16px var(--red-glow);
+}
+
+/* Dynamic Cards Grid */
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.post-item-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s var(--ease-out-expo), border-color 0.3s var(--ease-out-expo), box-shadow 0.3s;
+}
+.post-item-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--red-primary);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
+}
+.post-card-thumb {
+  height: 260px;
+  position: relative;
+  overflow: hidden;
+  background: #09090d;
+}
+.post-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: contrast(1.05) brightness(0.98);
+  transition: transform 0.5s var(--ease-out-expo);
+}
+.post-item-card:hover .post-card-thumb img {
+  transform: scale(1.04);
+}
+.post-number-tag {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(8, 8, 12, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 800;
+  color: var(--red-primary);
+}
+.post-cat-tag {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(8, 8, 12, 0.88);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 6px;
+  padding: 4px 10px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.post-card-body {
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+.post-title {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 10px;
+  letter-spacing: -0.4px;
+  line-height: 1.25;
+}
+.post-desc {
+  font-size: 14.5px;
+  color: var(--text-secondary);
+  line-height: 1.55;
+  margin-bottom: 20px;
+}
+.post-tags-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+.tech-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: #94a3b8;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 3px 8px;
+  border-radius: 4px;
+}
+.post-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+.post-date {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-muted);
+}
+.post-action-link {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--red-primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* ── OUR MISSION SECTION WITH RICH PHOTO HEADERS ── */
+.mission-section {
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 90px 0;
+}
+.mission-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-top: 40px;
+}
+.mission-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.45);
+  border-top: 4px solid;
+  transition: transform 0.3s var(--ease-out-expo), border-color 0.3s;
+}
+.mission-card:hover {
+  transform: translateY(-4px);
+}
+.mission-card.m-red { border-top-color: var(--red-primary); }
+.mission-card.m-cyan { border-top-color: var(--cyan-accent); }
+.mission-card.m-emerald { border-top-color: var(--emerald-accent); }
+
+.mission-card-thumb {
+  height: 160px;
+  position: relative;
+  overflow: hidden;
+}
+.mission-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.15) brightness(0.85);
+}
+.mission-thumb-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, var(--surface) 5%, transparent 70%);
+}
+
+.mission-card-body {
+  padding: 26px 28px 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+.mission-num {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+.mission-card.m-red .mission-num { color: var(--red-primary); }
+.mission-card.m-cyan .mission-num { color: var(--cyan-accent); }
+.mission-card.m-emerald .mission-num { color: var(--emerald-accent); }
+
+.mission-card h3 {
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 12px;
+  letter-spacing: -0.4px;
+  line-height: 1.2;
+}
+.mission-card p {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+.mission-footer-tag {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+}
+
+/* ── CREED / MANIFESTO ── */
+.manifesto-box {
+  margin: 90px 0;
+  background: linear-gradient(145deg, rgba(239, 68, 68, 0.12), rgba(17, 17, 24, 0.9));
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: var(--radius-xl);
+  padding: 64px 48px;
+  text-align: center;
+  box-shadow: 0 20px 60px rgba(239, 68, 68, 0.15);
+}
+.manifesto-title {
+  font-family: var(--font-display);
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 900;
+  letter-spacing: -1.8px;
+  color: #ffffff;
+  margin-bottom: 18px;
+}
+.manifesto-desc {
+  font-size: 20px;
+  color: var(--text-secondary);
+  max-width: 740px;
+  margin: 0 auto 36px;
+  line-height: 1.6;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 70px 0 40px;
+  border-top: 1px solid var(--border);
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 50px;
+}
+.footer-about p {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 380px;
+  margin-top: 12px;
+}
+.footer-col h5 {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--red-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 16px;
+}
+.footer-col ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.footer-col a {
+  color: var(--text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.footer-col a:hover {
+  color: #ffffff;
+}
+.bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 992px) {
+  .hero-layout { grid-template-columns: 1fr; gap: 40px; }
+  .posts-grid { grid-template-columns: repeat(2, 1fr); }
+  .mission-grid { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .story-banner-card { flex-direction: column; align-items: flex-start; }
+  .btn-story-watch { width: 100%; justify-content: center; }
+  .nav-menu { display: none; }
+}
+@media (max-width: 680px) {
+  .hero { padding-top: 120px; }
+  .hero-visual-stack { grid-template-columns: 1fr; }
+  .hero-img-card.featured-card { grid-column: span 1; }
+  .posts-grid { grid-template-columns: 1fr; }
+  .manifesto-box { padding: 40px 24px; }
+  .story-banner-left { flex-direction: column; align-items: flex-start; }
+}
+</style>
+</head>
+<body>
+
+<!-- Crisp Background Atmosphere -->
+<div class="grid-bg"></div>
+<div class="glow-orb-top"></div>
+<div class="glow-orb-bottom"></div>
+
+<!-- COMMAND HUB / TOP BAR -->
+<header class="top-header">
+  <div class="header-container">
+    <a href="#" class="brand-unit">
+      <div class="brand-symbol">Ai</div>
+      <div class="brand-titles">
+        <span class="brand-name">MasterAi Tech</span>
+        <span class="brand-sub">@MasterAi.CODE</span>
+      </div>
+    </a>
+
+    <!-- Live System Beacon -->
+    <div class="status-badge">
+      <div class="status-beacon"></div>
+      <span id="feed-counter">8 POSTS INDEXED</span>
+    </div>
+
+    <!-- Navigation Hub -->
+    <nav class="nav-menu">
+      <a href="#feed" class="nav-btn">Feed</a>
+      <a href="#mission" class="nav-btn">Our Mission</a>
+      <a href="#manifesto" class="nav-btn">Manifesto</a>
+    </nav>
+
+    <!-- Instagram Direct CTA -->
+    <a href="https://www.instagram.com/MasterAi.CODE/" target="_blank" rel="noopener" class="ig-action-btn">
+      Follow on IG &rarr;
+    </a>
+  </div>
+</header>
+
+<main class="container">
+  
+  <!-- HERO SECTION -->
+  <section class="hero">
+    <div class="hero-layout">
+      
+      <div class="hero-content">
+        <div class="hero-eyebrow">
+          <span>NEXT-GEN AI &amp; COMPUTING &bull; INDEPENDENT RESEARCH</span>
+        </div>
+        <h1 class="hero-h1">
+          We turn complex AI &amp; hardware into <span class="red-text">pure clarity.</span>
+        </h1>
+        <p class="hero-subtext">
+          Zero marketing fluff. Zero AI slop. Rigorous visual breakdowns of frontier models, computer architecture, autonomous developer agents, and the technology defining 2026.
+        </p>
+        <div class="hero-cta-row">
+          <a href="#feed" class="btn-solid">
+            Explore Breakdowns
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="#mission" class="btn-outline">
+            Our Mission
+          </a>
+        </div>
+      </div>
+
+      <!-- Right Visual Grid (Multi-Image Hardware & AI Architecture Stack) -->
+      <div class="hero-visual-stack">
+        <!-- Main Feature: Autonomous Cybernetics -->
+        <div class="hero-img-card featured-card">
+          <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1200&q=85" alt="Autonomous Cybernetics">
+          <div class="hero-card-gradient"></div>
+          <div class="hero-card-text">
+            <div>
+              <h4>Autonomous Robotics &amp; Embodied AI</h4>
+              <p>Neural Actuation &bull; Perception Models</p>
+            </div>
+            <span class="tag-badge">AI SYSTEMS</span>
+          </div>
+        </div>
+
+        <!-- Sub Feature 1: GPU Supercomputing -->
+        <div class="hero-img-card sub-card">
+          <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=85" alt="Datacenter Clusters">
+          <div class="hero-card-gradient"></div>
+          <div class="hero-card-text">
+            <div>
+              <h4>100k+ GPU Clusters</h4>
+              <p>Stargate Infrastructure</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sub Feature 2: Silicon Microarchitecture -->
+        <div class="hero-img-card sub-card">
+          <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=85" alt="Silicon Microarchitecture">
+          <div class="hero-card-gradient"></div>
+          <div class="hero-card-text">
+            <div>
+              <h4>Silicon &amp; Tensor Cores</h4>
+              <p>HBM3e Memory Channels</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- "SEE OUR LATEST STORY ON INSTAGRAM" HERO BANNER -->
+  <section class="story-banner-section">
+    <div class="story-banner-card">
+      <div class="story-banner-left">
+        <div class="story-ring-avatar">
+          <div class="story-ring-gradient">
+            <div class="story-ring-inner">
+              <span>Ai</span>
+            </div>
+          </div>
+          <div class="story-live-dot"></div>
+        </div>
+        <div class="story-banner-text">
+          <div class="story-banner-badge">REAL-TIME INTEL &bull; LIVE ON INSTAGRAM</div>
+          <h3 class="story-banner-heading">See our latest story on Instagram</h3>
+          <p class="story-banner-sub">
+            Daily breaking AI dispatches, quick hardware benchmarks, behind-the-scenes research, and interactive polls.
+          </p>
+        </div>
+      </div>
+      <a href="https://www.instagram.com/MasterAi.CODE/" target="_blank" rel="noopener" class="btn-story-watch">
+        Watch on Instagram &rarr;
+      </a>
+    </div>
+  </section>
+
+  <!-- AUTOMATED DYNAMIC POSTS SECTION -->
+  <section class="section" id="feed">
+    <div class="section-top">
+      <div>
+        <div class="section-tagline">DISPATCHES &amp; CAROUSELS</div>
+        <h2 class="section-heading">Latest Visual Intelligence.</h2>
+      </div>
+
+      <!-- Dynamic Category Filters -->
+      <div class="filter-tabs">
+        <button class="filter-btn active" onclick="filterPosts('all', this)">All Feeds</button>
+        <button class="filter-btn" onclick="filterPosts('tools', this)">AI Tools</button>
+        <button class="filter-btn" onclick="filterPosts('comparison', this)">Model Duels</button>
+        <button class="filter-btn" onclick="filterPosts('hardware', this)">Hardware</button>
+      </div>
+    </div>
+
+    <!-- Posts Container (Auto-populated by posts-data.js) -->
+    <div class="posts-grid" id="posts-container">
+      <!-- Generated via JavaScript automatically -->
+    </div>
+  </section>
+
+  <!-- OUR MISSION SECTION WITH RICH PHOTO HEADERS -->
+  <section class="mission-section" id="mission">
+    <div class="section-top" style="margin-bottom: 24px;">
+      <div>
+        <div class="section-tagline">OUR MISSION</div>
+        <h2 class="section-heading">Three Pillars of MasterAi Tech.</h2>
+      </div>
+    </div>
+
+    <div class="mission-grid">
+      
+      <!-- Pillar 1: Latest Tech & AI News (with Photo Banner) -->
+      <div class="mission-card m-red">
+        <div class="mission-card-thumb">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=85" alt="Global Tech &amp; AI Dispatches">
+          <div class="mission-thumb-overlay"></div>
+        </div>
+        <div class="mission-card-body">
+          <div>
+            <div class="mission-num">01 / LATEST NEWS</div>
+            <h3>Breaking Tech &amp; AI Intelligence</h3>
+            <p>
+              Delivering real-time, verified dispatches on frontier AI model releases, major industry announcements, breakthrough research, and security updates as they happen.
+            </p>
+          </div>
+          <div class="mission-footer-tag">REAL-TIME NEWS &bull; FRONTIER DISPATCHES</div>
+        </div>
+      </div>
+
+      <!-- Pillar 2: Technology & Computing (with Silicon/Hardware Photo Banner) -->
+      <div class="mission-card m-cyan">
+        <div class="mission-card-thumb">
+          <img src="https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=800&q=85" alt="Hardware Silicon Engineering">
+          <div class="mission-thumb-overlay"></div>
+        </div>
+        <div class="mission-card-body">
+          <div>
+            <div class="mission-num">02 / TECHNOLOGY</div>
+            <h3>Deep-Dives into Computing</h3>
+            <p>
+              Demystifying how modern technology actually works: from CPU and GPU silicon architecture, storage benchmarks, and networking to developer software and OS internals.
+            </p>
+          </div>
+          <div class="mission-footer-tag">HARDWARE &bull; NETWORKING &bull; SYSTEMS</div>
+        </div>
+      </div>
+
+      <!-- Pillar 3: Artificial Intelligence (with Robotics/AI Photo Banner) -->
+      <div class="mission-card m-emerald">
+        <div class="mission-card-thumb">
+          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=800&q=85" alt="Artificial Intelligence &amp; Robotics">
+          <div class="mission-thumb-overlay"></div>
+        </div>
+        <div class="mission-card-body">
+          <div>
+            <div class="mission-num">03 / ARTIFICIAL INTELLIGENCE</div>
+            <h3>Everything About Modern AI</h3>
+            <p>
+              Comprehensive visual breakdowns of large language models, autonomous developer agents, prompt engineering, neural network architectures, and practical everyday tools.
+            </p>
+          </div>
+          <div class="mission-footer-tag">MODELS &bull; AUTONOMOUS AGENTS &bull; TOOLS</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CREED / MANIFESTO -->
+  <section class="manifesto-box" id="manifesto">
+    <h2 class="manifesto-title">The MasterAi Creed</h2>
+    <p class="manifesto-desc">
+      Artificial intelligence is the most transformative invention in human history. To master it, you do not need hype or fear — you need grounded, uncompromising technical truth.
+    </p>
+    <a href="https://www.instagram.com/MasterAi.CODE/" target="_blank" rel="noopener" class="btn-solid">
+      Follow @MasterAi.CODE on Instagram &rarr;
+    </a>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <div class="brand-unit" style="margin-bottom: 8px;">
+          <div class="brand-symbol">Ai</div>
+          <span class="brand-name">MasterAi Tech</span>
+        </div>
+        <p>Demystifying next-gen AI, computer architecture, and developer intelligence for modern builders.</p>
+      </div>
+
+      <div class="footer-col">
+        <h5>Knowledge Index</h5>
+        <ul>
+          <li><a href="#feed">Claude vs GPT-6</a></li>
+          <li><a href="#feed">5 AI Tools Stack</a></li>
+          <li><a href="#feed">Inside Your Computer</a></li>
+          <li><a href="#feed">SSD vs HDD Showdown</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="https://www.instagram.com/MasterAi.CODE/" target="_blank" rel="noopener">Instagram (@MasterAi.CODE)</a></li>
+          <li><a href="#mission">Our Mission</a></li>
+          <li><a href="#manifesto">Our Manifesto</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="bottom-bar">
+      <div>&copy; 2026 MasterAi Tech. All research and visual breakdowns independent.</div>
+      <div>Running 24/7 on global edge network.</div>
+    </div>
+  </div>
+</footer>
+
+<!-- AUTOMATED REGISTRY & FEED ENGINE -->
+<script src="posts-data.js"></script>
+<script>
+// ==========================================
+// RENDER DYNAMIC POSTS
+// ==========================================
+function renderPosts(categoryFilter = 'all') {
+  const container = document.getElementById('posts-container');
+  if (!container || !window.MASTERAI_POSTS) return;
+
+  const filtered = categoryFilter === 'all'
+    ? window.MASTERAI_POSTS
+    : window.MASTERAI_POSTS.filter(p => p.category === categoryFilter);
+
+  container.innerHTML = filtered.map(post => `
+    <article class="post-item-card" data-category="${post.category}">
+      <div class="post-card-thumb">
+        <img src="${post.image}" alt="${post.title}" loading="lazy">
+        <span class="post-number-tag">${post.number}</span>
+        <span class="post-cat-tag">${post.categoryName}</span>
+      </div>
+      <div class="post-card-body">
+        <div>
+          <h3 class="post-title">${post.title}</h3>
+          <p class="post-desc">${post.description}</p>
+          <div class="post-tags-row">
+            ${post.tags.map(t => `<span class="tech-badge">${t}</span>`).join('')}
+          </div>
+        </div>
+        <div class="post-footer-row">
+          <span class="post-date">${post.date} &bull; ${post.slidesCount} Slides</span>
+          <a href="${post.igLink}" target="_blank" rel="noopener" class="post-action-link" style="color:${post.accentColor}">
+            Read Series &rarr;
+          </a>
+        </div>
+      </div>
+    </article>
+  `).join('');
+
+  const counter = document.getElementById('feed-counter');
+  if (counter) {
+    counter.textContent = `${window.MASTERAI_POSTS.length} POSTS INDEXED`;
+  }
+}
+
+function filterPosts(category, btnElement) {
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+  btnElement.classList.add('active');
+  renderPosts(category);
+}
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  renderPosts('all');
+});
+</script>
+
+</body>
+</html>
