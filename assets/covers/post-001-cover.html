@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080">
+<title>Post #001 Cover</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800;900&family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&family=JetBrains+Mono:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body {
+    width: 1080px; height: 1080px; overflow: hidden;
+    background: #08080c; font-family: 'DM Sans', sans-serif;
+    color: #ffffff; -webkit-font-smoothing: antialiased;
+  }
+  .slide {
+    position: relative; width: 1080px; height: 1080px;
+    overflow: hidden; background: #08080c;
+  }
+  .photo-bg {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: center 30%;
+    filter: contrast(1.15) brightness(0.7);
+  }
+  .fade-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, #08080c 15%, rgba(8,8,12,0.65) 50%, rgba(8,8,12,0.2) 100%);
+  }
+  .red-tint {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(239,68,68,0.12) 0%, transparent 60%);
+  }
+  .content {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 0 76px 90px; z-index: 10;
+  }
+  .brand-bar {
+    display: flex; align-items: center; gap: 12px; margin-bottom: 24px;
+  }
+  .brand-chip {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    color: #fff; font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800; font-size: 15px; padding: 5px 12px; border-radius: 8px;
+  }
+  .brand-name {
+    font-family: 'DM Sans', sans-serif; font-size: 16px; font-weight: 700; color: #fff;
+  }
+  .post-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+    color: #ef4444; background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3);
+    padding: 4px 12px; border-radius: 6px; margin-left: auto;
+  }
+  .headline {
+    font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 900; font-size: 66px;
+    line-height: 1.05; letter-spacing: -2px; color: #ffffff; margin-bottom: 18px;
+  }
+  .headline span.red { color: #ef4444; }
+  .lead {
+    font-family: 'DM Sans', sans-serif; font-size: 22px; color: #cbd5e1;
+    line-height: 1.5; max-width: 680px; margin-bottom: 30px;
+  }
+  .tags-row {
+    display: flex; gap: 8px;
+  }
+  .tag-item {
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+    color: #94a3b8; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
+    padding: 8px 18px; border-radius: 6px;
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+  <img class="photo-bg" src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=85" alt="">
+  <div class="fade-overlay"></div>
+  <div class="red-tint"></div>
+
+  <div class="content">
+    <div class="brand-bar">
+      <div class="brand-chip">Ai</div>
+      <span class="brand-name">MasterAi Tech</span>
+      <span class="post-num">POST #001</span>
+    </div>
+
+    <h1 class="headline">
+      Learning tech <br>
+      doesn't have to be <span class="red">hard.</span>
+    </h1>
+
+    <p class="lead">
+      Computers, frontier AI, coding, and the digital world — explained from scratch with zero fluff and maximum clarity.
+    </p>
+
+    <div class="tags-row">
+      <span class="tag-item">Computers</span>
+      <span class="tag-item">AI</span>
+      <span class="tag-item">Coding</span>
+      <span class="tag-item">Tips</span>
+    </div>
+  </div>
+</div>
+</body>
+</html>
