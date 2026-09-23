@@ -1,9 +1,23 @@
 // =============================================================================
 // MASTERAI TECH — INSTAGRAM FEED & DATA REGISTRY
-// All 8 posts linked with their exact local cover artwork & direct IG links
+// All 9 posts linked with their exact local cover artwork & direct IG links
 // =============================================================================
 
 const MASTERAI_POSTS = [
+  {
+    id: "post-009",
+    number: "POST #009",
+    category: "hardware",
+    categoryName: "TECH TIPS",
+    title: "Why Your Laptop Gets Slower Every Year (And How to Fix It)",
+    description: "Thermal throttling, startup overload, full storage, background processes, and too many Chrome tabs. 5 simple fixes you can do today.",
+    image: "assets/covers/cover-post-009.png",
+    date: "Sep 23, 2026",
+    slidesCount: 5,
+    igLink: "https://www.instagram.com/MasterAi.CODE/",
+    tags: ["LaptopSlow", "TechTips", "SSDUpgrade", "PCMaintenance"],
+    accentColor: "#ef4444"
+  },
   {
     id: "post-008",
     number: "POST #008",
