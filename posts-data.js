@@ -14,7 +14,7 @@ const MASTERAI_POSTS = [
     image: "assets/covers/cover-post-009.png",
     date: "Sep 23, 2026",
     slidesCount: 5,
-    igLink: "https://www.instagram.com/MasterAi.CODE/",
+    igLink: "https://www.instagram.com/p/DdoaJ_DE71_/",
     tags: ["LaptopSlow", "TechTips", "SSDUpgrade", "PCMaintenance"],
     accentColor: "#ef4444"
   },
