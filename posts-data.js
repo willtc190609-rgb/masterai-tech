@@ -14,7 +14,7 @@ const MASTERAI_POSTS = [
     image: "assets/covers/cover-post-010.png",
     date: "Sep 26, 2026",
     slidesCount: 5,
-    igLink: "https://www.instagram.com/MasterAi.CODE/",
+    igLink: "https://www.instagram.com/p/DdwdmQGE5yQ/",
     tags: ["ClaudeOpus", "Anthropic", "AINews", "Cybersecurity"],
     accentColor: "#D97757"
   },
