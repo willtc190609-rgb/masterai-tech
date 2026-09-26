@@ -5,6 +5,20 @@
 
 const MASTERAI_POSTS = [
   {
+    id: "post-010",
+    number: "POST #010",
+    category: "comparison",
+    categoryName: "AI NEWS",
+    title: "Claude Opus 5.5 Is Here: Everything New in Anthropic's Latest Model",
+    description: "Stricter cybersecurity safeguards, Claude Code Projects, Cowork Docs & Slides, and a real biology lab. The full breakdown.",
+    image: "assets/covers/cover-post-010.png",
+    date: "Sep 26, 2026",
+    slidesCount: 5,
+    igLink: "https://www.instagram.com/MasterAi.CODE/",
+    tags: ["ClaudeOpus", "Anthropic", "AINews", "Cybersecurity"],
+    accentColor: "#D97757"
+  },
+  {
     id: "post-009",
     number: "POST #009",
     category: "hardware",
