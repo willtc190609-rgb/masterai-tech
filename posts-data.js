@@ -5,6 +5,20 @@
 
 const MASTERAI_POSTS = [
   {
+    id: "post-011",
+    number: "POST #011",
+    category: "hardware",
+    categoryName: "PRODUCTIVITY",
+    title: "10 Hidden Shortcuts That Save You Hours",
+    description: "Windows, Mac, and universal keyboard shortcuts most people have no idea exist. Save this cheat sheet.",
+    image: "assets/covers/cover-post-011.png",
+    date: "Sep 29, 2026",
+    slidesCount: 5,
+    igLink: "https://www.instagram.com/p/Dd2fQ1Kkxwr/",
+    tags: ["Shortcuts", "Productivity", "Windows", "Mac"],
+    accentColor: "#ef4444"
+  },
+  {
     id: "post-010",
     number: "POST #010",
     category: "comparison",
