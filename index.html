@@ -112,40 +112,34 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 .btn-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 24px; border-radius: var(--radius-pill); transition: all .3s var(--ease); white-space: nowrap; margin-left: auto; flex-shrink: 0; }
 .btn-pill:hover { background: var(--red); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px var(--red-glow); }
 
-/* ── HORIZONTAL SCROLL POSTS ── */
-.hscroll-section { padding: 80px 0; }
-.hscroll-section .section-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 40px; flex-wrap: wrap; gap: 20px; }
+/* ── POSTS SECTION ── */
+.posts-section { padding: 80px 0; }
+.posts-section .section-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 20px; }
 .section-heading { font-family: var(--font-display); font-size: clamp(36px,4.5vw,56px); font-weight: 800; letter-spacing: -3px; }
 .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
 .filter-btn { background: transparent; border: 1.5px solid var(--border); color: var(--text-secondary); font-family: var(--font-body); font-size: 13px; font-weight: 600; padding: 8px 20px; border-radius: var(--radius-pill); cursor: pointer; transition: all .25s var(--ease); }
 .filter-btn.active, .filter-btn:hover { background: var(--text-primary); border-color: var(--text-primary); color: var(--bg); }
 
-/* Horizontal scroll track */
-.hscroll-track-wrap { overflow: visible; position: relative; }
-.hscroll-track { display: flex; gap: 24px; transition: transform .1s linear; will-change: transform; }
-.hscroll-card { flex: 0 0 380px; background: var(--surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: all .4s var(--ease); box-shadow: 0 2px 16px rgba(0,0,0,.03); }
-.hscroll-card:first-child { flex: 0 0 560px; }
-.hscroll-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,.1); border-color: var(--red); }
-.hcard-thumb { height: 240px; position: relative; overflow: hidden; background: var(--bg-warm); }
-.hscroll-card:first-child .hcard-thumb { height: 300px; }
-.hcard-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .6s var(--ease); }
-.hscroll-card:hover .hcard-thumb img { transform: scale(1.05); }
-.hcard-tag-l { position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border: 1px solid var(--border-light); border-radius: var(--radius-pill); padding: 4px 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 800; color: var(--red); }
-.hcard-tag-r { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border: 1px solid var(--border-light); border-radius: var(--radius-pill); padding: 4px 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--text-secondary); }
-.hcard-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
-.hcard-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; letter-spacing: -.5px; line-height: 1.25; margin-bottom: 8px; }
-.hcard-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 16px; }
-.hcard-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 16px; }
-.hcard-badge { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); background: var(--surface-alt); border: 1px solid var(--border-light); padding: 3px 10px; border-radius: var(--radius-pill); }
-.hcard-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--border-light); margin-top: auto; }
-.hcard-date { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
-.hcard-link { font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: gap .3s var(--ease); }
-.hcard-link:hover { gap: 8px; }
-
-/* scroll hint */
-.hscroll-hint { display: flex; align-items: center; gap: 8px; margin-top: 24px; font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
-.hscroll-hint svg { animation: nudge 2s var(--ease) infinite; }
-@keyframes nudge { 0%,100% { transform: translateX(0) } 50% { transform: translateX(8px) } }
+/* Vertical grid with staggered reveal */
+.posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.post-card { background: var(--surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: all .4s var(--ease); box-shadow: 0 2px 16px rgba(0,0,0,.03); }
+.post-card:first-child { grid-column: span 2; }
+.post-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(0,0,0,.1); border-color: var(--red); }
+.pcard-thumb { height: 260px; position: relative; overflow: hidden; background: var(--bg-warm); }
+.post-card:first-child .pcard-thumb { height: 340px; }
+.pcard-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .6s var(--ease); }
+.post-card:hover .pcard-thumb img { transform: scale(1.05); }
+.pcard-tag-l { position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border: 1px solid var(--border-light); border-radius: var(--radius-pill); padding: 4px 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 800; color: var(--red); }
+.pcard-tag-r { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border: 1px solid var(--border-light); border-radius: var(--radius-pill); padding: 4px 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--text-secondary); }
+.pcard-body { padding: 26px; display: flex; flex-direction: column; flex: 1; }
+.pcard-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -.5px; line-height: 1.25; margin-bottom: 10px; }
+.pcard-desc { font-size: 14.5px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 18px; }
+.pcard-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px; }
+.pcard-badge { font-family: var(--font-mono); font-size: 11px; color: var(--text-muted); background: var(--surface-alt); border: 1px solid var(--border-light); padding: 3px 10px; border-radius: var(--radius-pill); }
+.pcard-foot { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--border-light); margin-top: auto; }
+.pcard-date { font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); }
+.pcard-link { font-family: var(--font-body); font-size: 13px; font-weight: 700; color: var(--red); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: gap .3s var(--ease); }
+.pcard-link:hover { gap: 8px; }
 
 /* ── MISSION ── full-bleed cinematic zigzag */
 .mission-section { padding: 0; }
@@ -188,8 +182,8 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
   .mission-img-wrap img { position: absolute; }
   .mission-content { padding: 48px 32px; max-width: 100%; }
   .mission-block:nth-child(even) .mission-content { margin-left: 0; }
-  .hscroll-card { flex: 0 0 300px; }
-  .hscroll-card:first-child { flex: 0 0 420px; }
+  .posts-grid { grid-template-columns: repeat(2, 1fr); }
+  .post-card:first-child { grid-column: span 2; }
   .story-card { flex-direction: column; align-items: flex-start; }
   .btn-pill { margin-left: 0; width: 100%; justify-content: center; }
   .nav-menu { display: none; }
@@ -202,8 +196,9 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
   .manifesto-box { padding: 48px 24px; }
   .manifesto-wrap { padding: 60px 16px; }
   .story-card { padding: 24px; }
-  .hscroll-card { flex: 0 0 280px; }
-  .hscroll-card:first-child { flex: 0 0 300px; }
+  .posts-grid { grid-template-columns: 1fr; }
+  .post-card:first-child { grid-column: span 1; }
+  .post-card:first-child .pcard-thumb { height: 260px; }
 }
 </style>
 </head>
@@ -288,8 +283,8 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
     </div>
   </section>
 
-  <!-- ═══ HORIZONTAL SCROLL POSTS ═══ -->
-  <section class="hscroll-section" id="feed">
+  <!-- ═══ POSTS GRID WITH SCROLL REVEAL ═══ -->
+  <section class="posts-section" id="feed">
     <div class="container">
       <div class="section-top rv">
         <h2 class="section-heading">Latest breakdowns.</h2>
@@ -300,15 +295,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
           <button class="filter-btn" onclick="filterPosts('hardware',this)">Hardware</button>
         </div>
       </div>
-    </div>
-    <div class="container">
-      <div class="hscroll-track-wrap" id="hscroll-wrap">
-        <div class="hscroll-track" id="posts-container"></div>
-      </div>
-      <div class="hscroll-hint">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-        Scroll to explore all posts
-      </div>
+      <div class="posts-grid" id="posts-container"></div>
     </div>
   </section>
 
@@ -396,7 +383,6 @@ document.querySelectorAll('.counter').forEach(el => cObs.observe(el));
 // ── Parallax on scroll ──
 const parallaxEls = document.querySelectorAll('.parallax-img');
 function updateParallax() {
-  const sy = window.scrollY;
   parallaxEls.forEach(img => {
     const rect = img.parentElement.getBoundingClientRect();
     const speed = parseFloat(img.dataset.speed) || 0.2;
@@ -410,49 +396,32 @@ window.addEventListener('scroll', () => {
 }, { passive: true });
 updateParallax();
 
-// ── Horizontal scroll on vertical scroll ──
-const hWrap = document.getElementById('hscroll-wrap');
-const hTrack = document.getElementById('posts-container');
-function updateHScroll() {
-  if (!hWrap || !hTrack) return;
-  const rect = hWrap.getBoundingClientRect();
-  const wh = window.innerHeight;
-  // progress: 0 when top enters viewport, 1 when bottom leaves
-  const progress = Math.max(0, Math.min(1, (wh - rect.top) / (wh + rect.height)));
-  const maxScroll = hTrack.scrollWidth - hWrap.clientWidth;
-  if (maxScroll > 0) {
-    hTrack.style.transform = `translateX(-${progress * maxScroll}px)`;
-  }
-}
-window.addEventListener('scroll', () => {
-  if (!ticking) { requestAnimationFrame(() => { updateHScroll(); updateParallax(); ticking = false; }); ticking = true; }
-}, { passive: true });
-
-// ── Render Posts ──
+// ── Render Posts (vertical grid + scroll reveal per card) ──
 function renderPosts(cat) {
   const c = document.getElementById('posts-container');
   if (!c || !window.MASTERAI_POSTS) return;
   const list = cat === 'all' ? window.MASTERAI_POSTS : window.MASTERAI_POSTS.filter(p => p.category === cat);
-  c.innerHTML = list.map(p => `
-    <article class="hscroll-card" data-category="${p.category}">
-      <div class="hcard-thumb">
-        <img src="${p.image}" alt="${p.title}" loading="lazy">
-        <span class="hcard-tag-l">${p.number}</span>
-        <span class="hcard-tag-r">${p.categoryName}</span>
+  c.innerHTML = list.map((p, i) => `
+    <article class="post-card rv" style="transition-delay:${Math.min(i * 0.08, 0.4)}s" data-category="${p.category}">
+      <div class="pcard-thumb">
+        <img src="${p.image}" alt="${p.title}">
+        <span class="pcard-tag-l">${p.number}</span>
+        <span class="pcard-tag-r">${p.categoryName}</span>
       </div>
-      <div class="hcard-body">
-        <h3 class="hcard-title">${p.title}</h3>
-        <p class="hcard-desc">${p.description}</p>
-        <div class="hcard-tags">${p.tags.map(t=>`<span class="hcard-badge">${t}</span>`).join('')}</div>
-        <div class="hcard-foot">
-          <span class="hcard-date">${p.date} &bull; ${p.slidesCount} Slides</span>
-          <a href="${p.igLink}" target="_blank" rel="noopener" class="hcard-link">Read &rarr;</a>
+      <div class="pcard-body">
+        <h3 class="pcard-title">${p.title}</h3>
+        <p class="pcard-desc">${p.description}</p>
+        <div class="pcard-tags">${p.tags.map(t=>`<span class="pcard-badge">${t}</span>`).join('')}</div>
+        <div class="pcard-foot">
+          <span class="pcard-date">${p.date} &bull; ${p.slidesCount} Slides</span>
+          <a href="${p.igLink}" target="_blank" rel="noopener" class="pcard-link">Read &rarr;</a>
         </div>
       </div>
     </article>
   `).join('');
+  // Observe new cards for scroll reveal
+  c.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
   document.getElementById('feed-counter').textContent = `${window.MASTERAI_POSTS.length} POSTS INDEXED`;
-  updateHScroll();
 }
 function filterPosts(cat, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
