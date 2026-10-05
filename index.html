@@ -40,24 +40,24 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 
 /* ── ANIMATED BACKGROUND (Cypher Capital style) ── */
 .bg-mesh {
-  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+  position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
 }
 .bg-mesh .blob {
-  position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.35; will-change: transform;
+  position: absolute; border-radius: 50%; filter: blur(80px); will-change: transform;
 }
 .bg-mesh .blob-1 {
-  width: 600px; height: 600px; top: -10%; right: -5%;
-  background: radial-gradient(circle, rgba(220,38,38,0.25), transparent 70%);
+  width: 600px; height: 600px; top: -10%; right: -5%; opacity: 0.5;
+  background: rgba(220,38,38,0.3);
   animation: drift1 18s ease-in-out infinite alternate;
 }
 .bg-mesh .blob-2 {
-  width: 500px; height: 500px; bottom: 10%; left: -8%;
-  background: radial-gradient(circle, rgba(234,88,12,0.18), transparent 70%);
+  width: 500px; height: 500px; bottom: 10%; left: -8%; opacity: 0.4;
+  background: rgba(234,88,12,0.25);
   animation: drift2 22s ease-in-out infinite alternate;
 }
 .bg-mesh .blob-3 {
-  width: 450px; height: 450px; top: 40%; left: 50%;
-  background: radial-gradient(circle, rgba(220,38,38,0.12), transparent 70%);
+  width: 450px; height: 450px; top: 40%; left: 50%; opacity: 0.35;
+  background: rgba(220,38,38,0.2);
   animation: drift3 25s ease-in-out infinite alternate;
 }
 @keyframes drift1 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-120px, 80px) scale(1.15); } }
@@ -440,7 +440,7 @@ function renderPosts(cat) {
   c.innerHTML = list.map((p, i) => `
     <article class="post-card rv" style="transition-delay:${Math.min(i * 0.08, 0.4)}s" data-category="${p.category}">
       <div class="pcard-thumb">
-        <img src="${p.image}?v=2" alt="${p.title}">
+        <img src="${p.image}?v=3" alt="${p.title}" onerror="this.onerror=null;this.src='https://raw.githubusercontent.com/willtc190609-rgb/masterai-tech/main/${p.image}'">
         <span class="pcard-tag-l">${p.number}</span>
         <span class="pcard-tag-r">${p.categoryName}</span>
       </div>
@@ -455,7 +455,7 @@ function renderPosts(cat) {
       </div>
     </article>
   `).join('');
-  // Observe new cards for scroll reveal
+  // Observe new cards for scroll reveal - trigger immediately for visible ones
   c.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
   document.getElementById('feed-counter').textContent = `${window.MASTERAI_POSTS.length} POSTS INDEXED`;
 }
