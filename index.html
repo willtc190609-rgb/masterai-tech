@@ -35,6 +35,32 @@
 html { scroll-behavior: smooth; background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
 body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 
+/* ── ANIMATED BACKGROUND (Cypher Capital style) ── */
+.bg-mesh {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+}
+.bg-mesh .blob {
+  position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.35; will-change: transform;
+}
+.bg-mesh .blob-1 {
+  width: 600px; height: 600px; top: -10%; right: -5%;
+  background: radial-gradient(circle, rgba(220,38,38,0.25), transparent 70%);
+  animation: drift1 18s ease-in-out infinite alternate;
+}
+.bg-mesh .blob-2 {
+  width: 500px; height: 500px; bottom: 10%; left: -8%;
+  background: radial-gradient(circle, rgba(234,88,12,0.18), transparent 70%);
+  animation: drift2 22s ease-in-out infinite alternate;
+}
+.bg-mesh .blob-3 {
+  width: 450px; height: 450px; top: 40%; left: 50%;
+  background: radial-gradient(circle, rgba(220,38,38,0.12), transparent 70%);
+  animation: drift3 25s ease-in-out infinite alternate;
+}
+@keyframes drift1 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-120px, 80px) scale(1.15); } }
+@keyframes drift2 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(100px, -60px) scale(1.2); } }
+@keyframes drift3 { 0% { transform: translate(0, 0) scale(1); } 100% { transform: translate(-80px, -100px) scale(0.9); } }
+
 /* ── SCROLL REVEAL ── */
 .rv { opacity: 0; transform: translateY(50px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
 .rv.vis { opacity: 1; transform: translateY(0); }
@@ -67,7 +93,7 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 .ig-action-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 10px 24px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
 .ig-action-btn:hover { background: var(--red); color: #fff; transform: translateY(-1px); box-shadow: 0 8px 24px var(--red-glow); }
 
-.container { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 10; }
+.container { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
 
 /* ── HERO ── cinematic full-screen */
 .hero { padding-top: 140px; padding-bottom: 60px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
@@ -203,6 +229,13 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 </style>
 </head>
 <body>
+
+<!-- Animated gradient background -->
+<div class="bg-mesh">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+</div>
 
 <!-- TOP BAR -->
 <header class="top-header">
@@ -404,7 +437,7 @@ function renderPosts(cat) {
   c.innerHTML = list.map((p, i) => `
     <article class="post-card rv" style="transition-delay:${Math.min(i * 0.08, 0.4)}s" data-category="${p.category}">
       <div class="pcard-thumb">
-        <img src="${p.image}" alt="${p.title}">
+        <img src="${p.image}?v=2" alt="${p.title}">
         <span class="pcard-tag-l">${p.number}</span>
         <span class="pcard-tag-r">${p.categoryName}</span>
       </div>
