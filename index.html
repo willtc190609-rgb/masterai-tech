@@ -20,10 +20,10 @@
   --text-primary: #f0f0f0;
   --text-secondary: #8b95a5;
   --text-muted: #5a6475;
-  --green-primary: #00e87b;
-  --green-deep: #00a858;
-  --green-glow: rgba(0, 232, 123, 0.28);
-  --orange-accent: #ff5722;
+  --red-primary: #ef4444;
+  --red-deep: #dc2626;
+  --red-glow: rgba(239, 68, 68, 0.28);
+  --orange-accent: #f97316;
   --radius-sm: 8px;
   --radius-md: 14px;
   --radius-lg: 22px;
@@ -56,7 +56,7 @@ body {
   right: -8%;
   width: 800px;
   height: 800px;
-  background: radial-gradient(circle, rgba(0, 232, 123, 0.08) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.08) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -66,7 +66,7 @@ body {
   left: -12%;
   width: 750px;
   height: 750px;
-  background: radial-gradient(circle, rgba(0, 232, 123, 0.05) 0%, transparent 60%);
+  background: radial-gradient(circle, rgba(239, 68, 68, 0.05) 0%, transparent 60%);
   pointer-events: none;
   z-index: 0;
 }
@@ -102,7 +102,7 @@ body {
   width: 38px;
   height: 38px;
   border-radius: 10px;
-  background: linear-gradient(135deg, var(--green-deep), var(--green-primary));
+  background: linear-gradient(135deg, var(--red-deep), var(--red-primary));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -111,7 +111,7 @@ body {
   font-weight: 800;
   font-size: 16px;
   letter-spacing: -0.5px;
-  box-shadow: 0 4px 18px var(--green-glow);
+  box-shadow: 0 4px 18px var(--red-glow);
 }
 .brand-titles {
   display: flex;
@@ -129,7 +129,7 @@ body {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
-  color: var(--green-primary);
+  color: var(--red-primary);
   letter-spacing: 0.3px;
 }
 
@@ -150,8 +150,8 @@ body {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: var(--green-primary);
-  box-shadow: 0 0 10px var(--green-primary);
+  background: var(--red-primary);
+  box-shadow: 0 0 10px var(--red-primary);
   animation: pulse-beacon 2s infinite;
 }
 @keyframes pulse-beacon {
@@ -184,7 +184,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--green-primary);
+  background: var(--red-primary);
   color: #0d0f12;
   font-family: var(--font-display);
   font-size: 14px;
@@ -193,12 +193,12 @@ body {
   padding: 10px 22px;
   border-radius: var(--radius-sm);
   transition: all 0.25s var(--ease-out-expo);
-  box-shadow: 0 4px 18px var(--green-glow);
+  box-shadow: 0 4px 18px var(--red-glow);
 }
 .ig-action-btn:hover {
-  background: #33ff9e;
+  background: #ff6b6b;
   transform: translateY(-1px);
-  box-shadow: 0 6px 24px rgba(0, 232, 123, 0.45);
+  box-shadow: 0 6px 24px rgba(239, 68, 68, 0.45);
 }
 
 /* ── CONTAINER ── */
@@ -231,8 +231,8 @@ body {
   color: var(--text-primary);
   margin-bottom: 24px;
 }
-.hero-h1 .green-text {
-  color: var(--green-primary);
+.hero-h1 .accent-text {
+  color: var(--red-primary);
 }
 .hero-subtext {
   font-size: 18px;
@@ -251,7 +251,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--green-primary);
+  background: var(--red-primary);
   color: #0d0f12;
   font-family: var(--font-display);
   font-size: 16px;
@@ -260,12 +260,12 @@ body {
   padding: 16px 32px;
   border-radius: var(--radius-sm);
   transition: all 0.25s var(--ease-out-expo);
-  box-shadow: 0 6px 24px var(--green-glow);
+  box-shadow: 0 6px 24px var(--red-glow);
 }
 .btn-solid:hover {
-  background: #33ff9e;
+  background: #ff6b6b;
   transform: translateY(-2px);
-  box-shadow: 0 10px 30px rgba(0, 232, 123, 0.4);
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.4);
 }
 .btn-outline {
   display: inline-flex;
@@ -313,8 +313,8 @@ body {
   padding: 30px 0 20px;
 }
 .story-banner-card {
-  background: linear-gradient(135deg, rgba(0, 232, 123, 0.08), rgba(20, 22, 25, 0.95));
-  border: 1px solid rgba(0, 232, 123, 0.2);
+  background: linear-gradient(135deg, rgba(239, 68, 68, 0.08), rgba(20, 22, 25, 0.95));
+  border: 1px solid rgba(239, 68, 68, 0.2);
   border-radius: var(--radius-xl);
   padding: 32px 40px;
   display: flex;
@@ -325,7 +325,7 @@ body {
 }
 .story-banner-card:hover {
   transform: translateY(-3px);
-  border-color: rgba(0, 232, 123, 0.4);
+  border-color: rgba(239, 68, 68, 0.4);
 }
 .story-banner-content {
   flex: 1;
@@ -356,8 +356,8 @@ body {
   height: 100%;
   border-radius: 50%;
   padding: 3px;
-  background: linear-gradient(135deg, var(--green-primary), #00b4d8, var(--green-deep));
-  box-shadow: 0 0 18px var(--green-glow);
+  background: linear-gradient(135deg, var(--red-primary), #f97316, var(--red-deep));
+  box-shadow: 0 0 18px var(--red-glow);
 }
 .story-ring-inner {
   width: 100%;
@@ -382,15 +382,15 @@ body {
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: var(--green-primary);
+  background: var(--red-primary);
   border: 2.5px solid var(--bg);
-  box-shadow: 0 0 10px var(--green-primary);
+  box-shadow: 0 0 10px var(--red-primary);
 }
 .btn-story-watch {
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: var(--green-primary);
+  background: var(--red-primary);
   color: #0d0f12;
   font-family: var(--font-display);
   font-size: 15px;
@@ -399,15 +399,15 @@ body {
   padding: 14px 28px;
   border-radius: 100px;
   transition: all 0.25s var(--ease-out-expo);
-  box-shadow: 0 6px 24px var(--green-glow);
+  box-shadow: 0 6px 24px var(--red-glow);
   white-space: nowrap;
   margin-left: auto;
   flex-shrink: 0;
 }
 .btn-story-watch:hover {
   transform: translateY(-2px);
-  background: #33ff9e;
-  box-shadow: 0 10px 32px rgba(0, 232, 123, 0.4);
+  background: #ff6b6b;
+  box-shadow: 0 10px 32px rgba(239, 68, 68, 0.4);
 }
 
 /* ── POSTS SECTION ── */
@@ -449,10 +449,10 @@ body {
   transition: all 0.2s var(--ease-out-expo);
 }
 .filter-btn.active, .filter-btn:hover {
-  background: var(--green-primary);
-  border-color: var(--green-primary);
+  background: var(--red-primary);
+  border-color: var(--red-primary);
   color: #0d0f12;
-  box-shadow: 0 4px 16px var(--green-glow);
+  box-shadow: 0 4px 16px var(--red-glow);
 }
 
 /* Dynamic Cards Grid — masonry stagger */
@@ -475,7 +475,7 @@ body {
 }
 .post-item-card:hover {
   transform: translateY(-5px);
-  border-color: var(--green-primary);
+  border-color: var(--red-primary);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.6);
 }
 .post-card-thumb {
@@ -510,7 +510,7 @@ body {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 800;
-  color: var(--green-primary);
+  color: var(--red-primary);
 }
 .post-cat-tag {
   position: absolute;
@@ -580,7 +580,7 @@ body {
   font-family: var(--font-display);
   font-size: 13px;
   font-weight: 700;
-  color: var(--green-primary);
+  color: var(--red-primary);
   text-decoration: none;
   display: flex;
   align-items: center;
@@ -649,8 +649,8 @@ body {
 /* ── MANIFESTO ── */
 .manifesto-box {
   margin: 90px 0;
-  background: linear-gradient(145deg, rgba(0, 232, 123, 0.06), rgba(20, 22, 25, 0.9));
-  border: 1px solid rgba(0, 232, 123, 0.18);
+  background: linear-gradient(145deg, rgba(239, 68, 68, 0.06), rgba(20, 22, 25, 0.9));
+  border: 1px solid rgba(239, 68, 68, 0.18);
   border-radius: var(--radius-xl);
   padding: 64px 48px;
   text-align: center;
@@ -693,11 +693,11 @@ footer {
   font-family: var(--font-mono);
   font-size: 14px;
   font-weight: 700;
-  color: var(--green-primary);
+  color: var(--red-primary);
   text-decoration: none;
 }
 .footer-handle:hover {
-  color: #33ff9e;
+  color: #ff6b6b;
 }
 .footer-row-2 {
   display: flex;
@@ -755,7 +755,7 @@ footer {
 <header class="top-header">
   <div class="header-container">
     <a href="#" class="brand-unit">
-      <div class="brand-symbol">Ai</div>
+      <div class="brand-symbol"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg></div>
       <div class="brand-titles">
         <span class="brand-name">MasterAi Tech</span>
         <span class="brand-sub">@MasterAi.CODE</span>
@@ -789,7 +789,7 @@ footer {
     <div class="hero-layout">
       <div class="hero-content">
         <h1 class="hero-h1">
-          We tear apart GPUs, dissect AI models, and explain them <span class="green-text">from the bare metal up.</span>
+          We tear apart GPUs, dissect AI models, and explain them <span class="accent-text">from the bare metal up.</span>
         </h1>
         <p class="hero-subtext">
           Independent research straight from source code and research papers. No sponsors. No hype. No fluff.
