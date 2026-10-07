@@ -89,8 +89,8 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 .brand-titles { display: flex; flex-direction: column; }
 .brand-name { font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px; line-height: 1.15; }
 .brand-sub { font-family: var(--font-mono); font-size: 11px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.3px; }
-.status-badge { display: flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--border-light); padding: 4px 10px; border-radius: var(--radius-pill); font-family: var(--font-body); font-size: 10px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.3px; }
-.status-beacon { width: 6px; height: 6px; border-radius: 50%; background: var(--red); box-shadow: 0 0 6px var(--red); animation: pulse 2s infinite; }
+.status-badge { display: flex; align-items: center; gap: 4px; padding: 3px 8px; border-radius: var(--radius-pill); font-family: var(--font-display); font-size: 8px; font-weight: 600; color: var(--text-muted); letter-spacing: 0.5px; text-transform: uppercase; }
+.status-beacon { width: 4px; height: 4px; border-radius: 50%; background: var(--red); box-shadow: 0 0 4px var(--red); animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100% { transform: scale(.95); opacity: .8 } 50% { transform: scale(1.3); opacity: 1 } }
 .nav-menu { display: flex; align-items: center; gap: 4px; }
 .nav-btn { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--text-secondary); text-decoration: none; padding: 8px 16px; border-radius: var(--radius-pill); transition: all .25s var(--ease); }
@@ -153,9 +153,9 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 
 /* Vertical grid with staggered reveal */
 .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.post-card { background: var(--surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: all .4s var(--ease); box-shadow: 0 4px 20px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04); }
+.post-card { background: var(--surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: all .4s var(--ease); box-shadow: 0 8px 30px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.03); }
 .post-card:first-child { grid-column: span 2; }
-.post-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,.14), 0 4px 12px rgba(0,0,0,.06); border-color: var(--red); }
+.post-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,.12), 0 8px 20px rgba(0,0,0,.06); border-color: var(--red); }
 .pcard-thumb { height: 260px; position: relative; overflow: hidden; background: var(--bg-warm); }
 .post-card:first-child .pcard-thumb { height: 340px; }
 .pcard-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .6s var(--ease); }
@@ -307,23 +307,6 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
       <div class="stat-item"><span class="stat-num">60<span class="suf">+</span></span><span class="stat-label">Slides of visual breakdowns</span></div>
       <div class="stat-item"><span class="stat-num">5</span><span class="stat-label">Topics covered weekly</span></div>
       <div class="stat-item"><span class="stat-num">100<span class="suf">%</span></span><span class="stat-label">Independent, zero sponsors</span></div>
-    </div>
-  </section>
-
-  <!-- ═══ STORY BANNER ═══ -->
-  <section class="story-section rv">
-    <div class="container">
-      <div class="story-card">
-        <div class="story-ring">
-          <div class="story-ring-bg"><div class="story-ring-inner">Ai</div></div>
-          <div class="story-dot"></div>
-        </div>
-        <div class="story-text">
-          <h3>Check our latest story</h3>
-          <p>Quick dispatches, polls, and behind-the-scenes.</p>
-        </div>
-        <a href="https://www.instagram.com/MasterAi.CODE/" target="_blank" rel="noopener" class="btn-pill">Watch on Instagram &rarr;</a>
-      </div>
     </div>
   </section>
 
