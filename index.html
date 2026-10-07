@@ -215,27 +215,56 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 
 /* ── RESPONSIVE ── */
 @media (max-width:992px) {
-  .hero { min-height: auto; padding-top: 120px; }
+  .hero { min-height: auto; padding-top: 120px; padding-bottom: 50px; }
+  .hero .container { padding: 0 24px !important; }
+  .hero-h1 { font-size: clamp(32px, 7vw, 52px); letter-spacing: -2px; max-width: 100%; }
+  .hero-sub { font-size: 15px; max-width: 100%; }
   .mission-block { grid-template-columns: 1fr; min-height: auto; }
   .mission-block.reverse { direction: ltr; }
-  .mission-img-wrap { height: 50vh; position: relative; }
+  .mission-img-wrap { height: 45vh; position: relative; }
   .mission-img-wrap img { position: absolute; }
-  .mission-content { padding: 48px 32px; max-width: 100%; }
+  .mission-content { padding: 40px 24px; max-width: 100%; }
+  .mission-content h3 { font-size: 26px; letter-spacing: -1px; }
   .mission-block:nth-child(even) .mission-content { margin-left: 0; }
-  .posts-grid { grid-template-columns: repeat(2, 1fr); }
+  .posts-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
   .post-card:first-child { grid-column: span 2; }
+  .header-container { padding: 0 20px; gap: 16px; }
   .nav-menu { display: none; }
+  .feed-marquee .section-heading { font-size: 64px !important; }
 }
 @media (max-width:680px) {
-  .hero { padding-top: 110px; }
-  .hero-h1 { letter-spacing: -2px; }
-  .mission-img-wrap { height: 40vh; }
-  .manifesto-box { padding: 48px 24px; }
-  .manifesto-wrap { padding: 60px 16px; }
-  .story-card { padding: 24px; }
-  .posts-grid { grid-template-columns: 1fr; }
+  .hero { padding-top: 100px; padding-bottom: 40px; }
+  .hero .container { padding: 0 20px !important; }
+  .hero-h1 { font-size: clamp(26px, 8vw, 38px); letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 16px; }
+  .hero-sub { font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
+  .btn-solid, .btn-outline { font-size: 13px; padding: 12px 22px; }
+  .hero-video-bg video { opacity: 0.6; }
+  .mission-img-wrap { height: 35vh; }
+  .mission-content { padding: 32px 20px; }
+  .mission-content h3 { font-size: 22px; }
+  .mission-content p { font-size: 15px; }
+  .manifesto-box { padding: 40px 24px; }
+  .manifesto-wrap { padding: 40px 16px; }
+  .manifesto-title { font-size: 28px; letter-spacing: -1.5px; }
+  .manifesto-desc { font-size: 15px; }
+  .posts-section { padding: 40px 0; }
+  .posts-grid { grid-template-columns: 1fr; gap: 16px; }
   .post-card:first-child { grid-column: span 1; }
-  .post-card:first-child .pcard-thumb { height: 260px; }
+  .post-card:first-child .pcard-thumb { height: 220px; }
+  .pcard-thumb { height: 200px; }
+  .pcard-body { padding: 20px; }
+  .pcard-title { font-size: 17px; }
+  .pcard-desc { font-size: 13px; }
+  .feed-marquee .section-heading { font-size: 40px !important; }
+  .filter-tabs { gap: 6px; justify-content: center; }
+  .filter-btn { font-size: 11px; padding: 6px 14px; }
+  .header-container { padding: 0 16px; gap: 10px; }
+  .brand-name { font-size: 15px; }
+  .brand-sub { font-size: 10px; }
+  .ig-action-btn { font-size: 12px; padding: 8px 16px; }
+  .foot-1, .foot-2 { flex-direction: column; text-align: center; gap: 8px; }
+  .foot-built { font-size: 13px; }
+  footer { padding: 28px 0; }
 }
 </style>
 </head>
