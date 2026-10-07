@@ -116,7 +116,9 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 .btn-outline:hover { border-color: var(--text-primary); background: rgba(0,0,0,.03); }
 
 /* Feed header inside hero */
-.hero-feed-header { margin-top: 64px; width: 100%; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) 1.15s forwards; }
+.hero-feed-header { margin-top: 64px; width: 100%; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) 1.15s forwards; display: flex; flex-direction: column; align-items: center; }
+.hero-feed-header .section-heading { text-align: center; }
+.hero-feed-header .filter-tabs { justify-content: center; }
 
 /* ── STATS MARQUEE ── */
 .stats-strip { padding: 64px 0; border-bottom: 1px solid var(--border); overflow: hidden; }
