@@ -114,6 +114,9 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text-primary); border: 1.5px solid var(--border); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 13px 24px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
 .btn-outline:hover { border-color: var(--text-primary); background: rgba(0,0,0,.03); }
 
+/* Feed header inside hero */
+.hero-feed-header { margin-top: 64px; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) 1.15s forwards; }
+
 /* ── STATS MARQUEE ── */
 .stats-strip { padding: 64px 0; border-bottom: 1px solid var(--border); overflow: hidden; }
 .stats-track { display: flex; gap: 80px; animation: marquee 20s linear infinite; }
@@ -277,13 +280,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
         <a href="#feed" class="btn-solid">Explore Breakdowns <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
         <a href="#mission" class="btn-outline">Our Mission</a>
       </div>
-    </div>
-  </section>
-
-  <!-- ═══ POSTS GRID WITH SCROLL REVEAL ═══ -->
-  <section class="posts-section" id="feed">
-    <div class="container">
-      <div class="section-top rv">
+      <div class="section-top hero-feed-header">
         <h2 class="section-heading">Latest breakdowns.</h2>
         <div class="filter-tabs">
           <button class="filter-btn active" onclick="filterPosts('all',this)">All Feeds</button>
@@ -292,43 +289,14 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
           <button class="filter-btn" onclick="filterPosts('hardware',this)">Hardware</button>
         </div>
       </div>
-      <div class="posts-grid" id="posts-container"></div>
     </div>
   </section>
 
-  <!-- ═══ MISSION ── cinematic full-bleed zigzag ═══ -->
-  <section class="mission-section" id="mission">
-
-    <div class="mission-block">
-      <div class="mission-content rv-left">
-        <h3>Breaking news, verified.</h3>
-        <p>When a new AI model drops or a rogue agent goes haywire, we break it down within hours&thinsp;&mdash;&thinsp;with sources, not speculation.</p>
-      </div>
-      <div class="mission-img-wrap rv-scale">
-        <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=1000&q=85" alt="Newspaper" loading="lazy" class="parallax-img" data-speed="0.2">
-      </div>
+  <!-- ═══ POSTS GRID WITH SCROLL REVEAL ═══ -->
+  <section class="posts-section" id="feed">
+    <div class="container">
+      <div class="posts-grid" id="posts-container"></div>
     </div>
-
-    <div class="mission-block reverse">
-      <div class="mission-content rv-right">
-        <h3>Hardware, explained like you're&nbsp;12.</h3>
-        <p>CPUs, GPUs, SSDs, RAM&thinsp;&mdash;&thinsp;we explain how your computer actually works using real benchmarks and diagrams, not marketing slides.</p>
-      </div>
-      <div class="mission-img-wrap rv-scale">
-        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1000&q=85" alt="Code on screen" loading="lazy" class="parallax-img" data-speed="0.2">
-      </div>
-    </div>
-
-    <div class="mission-block">
-      <div class="mission-content rv-left">
-        <h3>AI without the buzzwords.</h3>
-        <p>Neural networks, transformers, prompt engineering&thinsp;&mdash;&thinsp;explained so clearly your grandma could follow along.</p>
-      </div>
-      <div class="mission-img-wrap rv-scale">
-        <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=1000&q=85" alt="Abstract neural tech" loading="lazy" class="parallax-img" data-speed="0.2">
-      </div>
-    </div>
-
   </section>
 
 </main>
