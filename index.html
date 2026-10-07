@@ -10,7 +10,7 @@
 <meta name="description" content="MasterAi Tech (@MasterAi.CODE): Independent research, model breakdowns, computer science fundamentals, and developer intelligence.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,700&family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -30,7 +30,7 @@
   --radius-pill: 100px;
   --radius-lg: 22px;
   --radius-xl: 32px;
-  --font-display: 'Syne', sans-serif;
+  --font-display: 'Playfair Display', serif;
   --font-body: 'DM Sans', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --ease: cubic-bezier(0.16,1,0.3,1);
@@ -116,9 +116,9 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 .btn-outline:hover { border-color: var(--text-primary); background: rgba(0,0,0,.03); }
 
 /* Feed header inside hero */
-.hero-feed-header { margin-top: 64px; padding: 0 32px; opacity: 0; animation: stag .8s var(--ease) 1.15s forwards; display: flex; flex-direction: column; align-items: center; transform: translateY(20px); text-align: center; }
-.hero-feed-header .section-heading { text-align: center; }
-.hero-feed-header .filter-tabs { justify-content: center; }
+.hero-feed-header { margin-top: 64px; width: 100%; opacity: 0; animation: stag .8s var(--ease) 1.15s forwards; display: flex; flex-direction: column; align-items: center; transform: translateY(20px); text-align: center; }
+.hero-feed-header .section-heading { text-align: center; width: 100%; }
+.hero-feed-header .filter-tabs { justify-content: center; width: 100%; }
 
 /* ── STATS MARQUEE ── */
 .stats-strip { padding: 64px 0; border-bottom: 1px solid var(--border); overflow: hidden; }
