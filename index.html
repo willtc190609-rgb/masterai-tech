@@ -10,7 +10,7 @@
 <meta name="description" content="MasterAi Tech (@MasterAi.CODE): Independent research, model breakdowns, computer science fundamentals, and developer intelligence.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 :root {
@@ -30,41 +30,41 @@
   --radius-pill: 100px;
   --radius-lg: 22px;
   --radius-xl: 32px;
-  --font-display: 'Instrument Serif', serif;
-  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Poppins', sans-serif;
+  --font-body: 'Roboto', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   --ease: cubic-bezier(0.16,1,0.3,1);
 }
 html { scroll-behavior: smooth; background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
 body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 
-/* ── ANIMATED LINES BACKGROUND (scroll-driven + continuous) ── */
-.bg-lines {
-  position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+/* ── VIDEO BACKGROUND (hero only) ── */
+.hero { position: relative; overflow: hidden; }
+.hero-video-bg {
+  position: absolute; inset: 0; z-index: 0;
 }
-.bg-lines svg {
-  width: 100%; height: 100%; position: absolute; inset: 0;
+.hero-video-bg video {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover; opacity: 0;
+  filter: saturate(1.2) contrast(1.1) brightness(0.9);
 }
-.bg-lines .line-path {
-  fill: none; stroke-linecap: round;
-  stroke-dasharray: 800 400;
-  animation: line-flow 8s linear infinite;
+/* Red color grade overlay */
+.hero-video-bg::before {
+  content: ''; position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(135deg, rgba(180,20,20,0.18) 0%, rgba(192,192,192,0.12) 50%, rgba(180,20,20,0.15) 100%);
+  mix-blend-mode: multiply;
 }
-.bg-lines .lp1 { stroke: rgba(220,38,38,0.30); stroke-width: 3; animation-duration: 7s; }
-.bg-lines .lp2 { stroke: rgba(234,88,12,0.25); stroke-width: 2.5; animation-duration: 9s; animation-delay: -2s; }
-.bg-lines .lp3 { stroke: rgba(185,28,28,0.22); stroke-width: 3.5; animation-duration: 11s; animation-delay: -4s; }
-.bg-lines .lp4 { stroke: rgba(251,146,60,0.28); stroke-width: 2; animation-duration: 8s; animation-delay: -1s; }
-.bg-lines .lp5 { stroke: rgba(220,38,38,0.18); stroke-width: 4; animation-duration: 13s; animation-delay: -6s; }
-.bg-lines .lp6 { stroke: rgba(249,115,22,0.24); stroke-width: 2.5; animation-duration: 10s; animation-delay: -3s; }
-.bg-lines .lp7 { stroke: rgba(190,50,50,0.16); stroke-width: 3; animation-duration: 12s; animation-delay: -5s; }
-.bg-lines .lp8 { stroke: rgba(220,38,38,0.14); stroke-width: 3.5; animation-duration: 14s; animation-delay: -7s; }
-/* paused by default, play on scroll */
-.bg-lines.paused .line-path { animation-play-state: paused; }
-.bg-lines.playing .line-path { animation-play-state: running; }
-@keyframes line-flow {
-  0% { stroke-dashoffset: 0; }
-  100% { stroke-dashoffset: -1200; }
+/* Bottom fade to page bg */
+.hero-video-bg::after {
+  content: ''; position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(to bottom, transparent 0%, transparent 50%, var(--bg) 100%);
 }
+/* Vignette edges */
+.hero-vignette {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  box-shadow: inset 0 0 150px 60px rgba(0,0,0,0.25);
+}
+.hero .container { position: relative; z-index: 3; }
 
 /* ── SCROLL REVEAL ── */
 .rv { opacity: 0; transform: translateY(50px); transition: opacity 0.9s var(--ease), transform 0.9s var(--ease); }
@@ -82,7 +82,7 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 .parallax-img { will-change: transform; transition: none; }
 
 /* ── TOP BAR ── */
-.top-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,240,235,0.55); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border-bottom: 1px solid rgba(224,217,208,0.4); padding: 14px 0; }
+.top-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,240,235,0.35); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(224,217,208,0.2); padding: 14px 0; }
 .header-container { max-width: 1280px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: center; align-items: center; gap: 32px; }
 .brand-unit { display: flex; align-items: center; gap: 14px; text-decoration: none; }
 .brand-symbol { width: 40px; height: 40px; border-radius: 10px; background: var(--red); display: flex; align-items: center; justify-content: center; color: #fff; box-shadow: 0 2px 12px var(--red-glow); }
@@ -103,7 +103,7 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 /* ── HERO ── text only, flush left edge */
 .hero { padding-top: 160px; padding-bottom: 80px; min-height: 90vh; display: flex; align-items: center; }
 .hero .container { max-width: 100%; margin: 0; padding: 0 32px 0 12px !important; }
-.hero-h1 { font-family: var(--font-display); font-size: clamp(36px,5vw,72px); font-weight: 400; line-height: 1.1; letter-spacing: -1.5px; color: var(--text-primary); margin-bottom: 24px; max-width: 850px; }
+.hero-h1 { font-family: var(--font-display); font-size: clamp(36px,5vw,72px); font-weight: 700; line-height: 1.08; letter-spacing: -2.5px; color: var(--text-primary); margin-bottom: 24px; max-width: 850px; }
 .hero-h1 .line { display: block; opacity: 0; transform: translateY(50px); animation: stag 1s var(--ease) forwards; }
 .hero-h1 .line:nth-child(1) { animation-delay: .3s } .hero-h1 .line:nth-child(2) { animation-delay: .5s } .hero-h1 .line:nth-child(3) { animation-delay: .7s }
 .accent { color: var(--red); }
@@ -116,9 +116,15 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 .btn-outline:hover { border-color: var(--text-primary); background: rgba(0,0,0,.03); }
 
 /* Feed header inside hero */
-.hero-feed-header { margin-top: 64px; width: 100%; opacity: 0; animation: stag .8s var(--ease) 1.15s forwards; display: flex; flex-direction: column; align-items: center; transform: translateY(20px); text-align: center; }
-.hero-feed-header .section-heading { text-align: center; width: 100%; }
-.hero-feed-header .filter-tabs { justify-content: center; width: 100%; }
+/* Feed header marquee */
+.hero-feed-header { margin-top: 40px; margin-bottom: 20px; overflow: hidden; width: 100%; position: relative; }
+.hero-feed-header::before, .hero-feed-header::after { content: ''; position: absolute; top: 0; bottom: 0; width: 60px; z-index: 2; pointer-events: none; }
+.hero-feed-header::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+.hero-feed-header::after { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+.feed-marquee { display: flex; white-space: nowrap; }
+.feed-marquee .section-heading { font-size: clamp(48px,8vw,120px); font-weight: 700; letter-spacing: -3px; flex-shrink: 0; color: var(--text-primary); padding: 0 40px; }
+.feed-marquee .section-heading .dot { color: var(--red); }
+.hero-feed-header .filter-tabs { justify-content: center; width: 100%; margin-top: 24px; display: flex; position: relative; z-index: 3; }
 
 /* ── STATS MARQUEE ── */
 .stats-strip { padding: 64px 0; border-bottom: 1px solid var(--border); overflow: hidden; }
@@ -177,7 +183,7 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 .mission-block { display: grid; grid-template-columns: 1fr 1fr; min-height: 80vh; }
 .mission-block.reverse { direction: rtl; }
 .mission-block.reverse > * { direction: ltr; }
-.mission-img-wrap { position: relative; overflow: hidden; }
+.mission-img-wrap { position: relative; overflow: hidden; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.3); }
 .mission-img-wrap img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; filter: contrast(1.08) brightness(.88) saturate(.85); }
 .mission-content { display: flex; flex-direction: column; justify-content: center; padding: 80px 64px; max-width: 580px; }
 .mission-block:nth-child(even) .mission-content { margin-left: auto; }
@@ -231,20 +237,6 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 </head>
 <body>
 
-<!-- Animated lines background (scroll-driven) -->
-<div class="bg-lines">
-  <svg viewBox="0 0 1440 900" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-    <path class="line-path lp1" d="M-50,150 C200,50 400,250 720,180 S1100,80 1500,200"/>
-    <path class="line-path lp2" d="M-50,280 C180,180 500,380 780,260 S1050,160 1500,320"/>
-    <path class="line-path lp3" d="M-50,420 C250,320 450,520 700,400 S1000,300 1500,450"/>
-    <path class="line-path lp4" d="M-50,550 C300,450 520,650 750,530 S1100,430 1500,580"/>
-    <path class="line-path lp5" d="M-50,680 C220,580 480,780 730,660 S1050,560 1500,710"/>
-    <path class="line-path lp6" d="M-50,350 C350,250 600,450 850,330 S1150,230 1500,380"/>
-    <path class="line-path lp7" d="M-50,500 C150,400 380,600 680,480 S980,380 1500,530"/>
-    <path class="line-path lp8" d="M-50,780 C280,680 550,850 800,750 S1100,650 1500,800"/>
-  </svg>
-</div>
-
 <!-- TOP BAR -->
 <header class="top-header">
   <div class="header-container">
@@ -268,6 +260,15 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
+    <div class="hero-video-bg">
+      <video id="vid-a" muted playsinline>
+        <source src="assets/hero-bg.mp4" type="video/mp4">
+      </video>
+      <video id="vid-b" muted playsinline>
+        <source src="assets/hero-bg.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-vignette"></div>
     <div class="container">
       <h1 class="hero-h1">
         <span class="line">We tear apart GPUs,</span>
@@ -280,24 +281,68 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
         <a href="#mission" class="btn-outline">Our Mission</a>
       </div>
     </div>
-    <!-- Latest breakdowns outside hero container -->
-    <div class="hero-feed-header">
-      <h2 class="section-heading">Latest breakdowns.</h2>
-      <div class="filter-tabs">
-        <button class="filter-btn active" onclick="filterPosts('all',this)">All Feeds</button>
-        <button class="filter-btn" onclick="filterPosts('tools',this)">AI Tools</button>
-        <button class="filter-btn" onclick="filterPosts('comparison',this)">Model Duels</button>
-        <button class="filter-btn" onclick="filterPosts('hardware',this)">Hardware</button>
-      </div>
-    </div>
-    </div>
   </section>
+
+  <!-- Latest breakdowns marquee -->
+  <div class="hero-feed-header">
+    <div class="feed-marquee">
+      <h2 class="section-heading">Latest breakdowns<span class="dot">.</span></h2>
+      <h2 class="section-heading">Latest breakdowns<span class="dot">.</span></h2>
+      <h2 class="section-heading">Latest breakdowns<span class="dot">.</span></h2>
+      <h2 class="section-heading">Latest breakdowns<span class="dot">.</span></h2>
+      <h2 class="section-heading">Latest breakdowns<span class="dot">.</span></h2>
+      <h2 class="section-heading">Latest breakdowns<span class="dot">.</span></h2>
+      <h2 class="section-heading">Latest breakdowns<span class="dot">.</span></h2>
+      <h2 class="section-heading">Latest breakdowns<span class="dot">.</span></h2>
+    </div>
+    <div class="filter-tabs">
+      <button class="filter-btn active" onclick="filterPosts('all',this)">All Feeds</button>
+      <button class="filter-btn" onclick="filterPosts('tools',this)">AI Tools</button>
+      <button class="filter-btn" onclick="filterPosts('comparison',this)">Model Duels</button>
+      <button class="filter-btn" onclick="filterPosts('hardware',this)">Hardware</button>
+    </div>
+  </div>
 
   <!-- ═══ POSTS GRID WITH SCROLL REVEAL ═══ -->
   <section class="posts-section" id="feed">
     <div class="container">
       <div class="posts-grid" id="posts-container"></div>
     </div>
+  </section>
+
+  <!-- ═══ MISSION ── cinematic full-bleed zigzag ═══ -->
+  <section class="mission-section" id="mission">
+
+    <div class="mission-block">
+      <div class="mission-content rv-left">
+        <h3>Breaking news, verified.</h3>
+        <p>When a new AI model drops or a rogue agent goes haywire, we break it down within hours&thinsp;&mdash;&thinsp;with sources, not speculation.</p>
+      </div>
+      <div class="mission-img-wrap rv-scale">
+        <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=1000&q=85" alt="Newspaper" loading="lazy" class="parallax-img" data-speed="0.2">
+      </div>
+    </div>
+
+    <div class="mission-block reverse">
+      <div class="mission-content rv-right">
+        <h3>Hardware, explained like you're&nbsp;12.</h3>
+        <p>CPUs, GPUs, SSDs, RAM&thinsp;&mdash;&thinsp;we explain how your computer actually works using real benchmarks and diagrams, not marketing slides.</p>
+      </div>
+      <div class="mission-img-wrap rv-scale">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1000&q=85" alt="Code on screen" loading="lazy" class="parallax-img" data-speed="0.2">
+      </div>
+    </div>
+
+    <div class="mission-block">
+      <div class="mission-content rv-left">
+        <h3>AI without the buzzwords.</h3>
+        <p>Neural networks, transformers, prompt engineering&thinsp;&mdash;&thinsp;explained so clearly your grandma could follow along.</p>
+      </div>
+      <div class="mission-img-wrap rv-scale">
+        <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=1000&q=85" alt="Abstract neural tech" loading="lazy" class="parallax-img" data-speed="0.2">
+      </div>
+    </div>
+
   </section>
 
 </main>
@@ -357,22 +402,7 @@ function updateParallax() {
   });
 }
 let ticking = false;
-
-// ── Lines: start paused, play when user scrolls ──
-const bgLines = document.querySelector('.bg-lines');
-if (bgLines) bgLines.classList.add('paused');
-let scrollTimeout;
 window.addEventListener('scroll', () => {
-  if (bgLines) {
-    bgLines.classList.remove('paused');
-    bgLines.classList.add('playing');
-    clearTimeout(scrollTimeout);
-    // Pause again after user stops scrolling for 2s
-    scrollTimeout = setTimeout(() => {
-      bgLines.classList.remove('playing');
-      bgLines.classList.add('paused');
-    }, 2000);
-  }
   if (!ticking) { requestAnimationFrame(() => { updateParallax(); ticking = false; }); ticking = true; }
 }, { passive: true });
 updateParallax();
@@ -386,13 +416,10 @@ function renderPosts(cat) {
     <article class="post-card rv" style="transition-delay:${Math.min(i * 0.08, 0.4)}s" data-category="${p.category}">
       <div class="pcard-thumb">
         <img src="${p.image}" alt="${p.title}">
-        <span class="pcard-tag-l">${p.number}</span>
-        <span class="pcard-tag-r">${p.categoryName}</span>
       </div>
       <div class="pcard-body">
         <h3 class="pcard-title">${p.title}</h3>
         <p class="pcard-desc">${p.description}</p>
-        <div class="pcard-tags">${p.tags.map(t=>`<span class="pcard-badge">${t}</span>`).join('')}</div>
         <div class="pcard-foot">
           <span class="pcard-date">${p.date} &bull; ${p.slidesCount} Slides</span>
           <a href="${p.igLink}" target="_blank" rel="noopener" class="pcard-link">Read &rarr;</a>
@@ -408,7 +435,78 @@ function filterPosts(cat, btn) {
   btn.classList.add('active');
   renderPosts(cat);
 }
-document.addEventListener('DOMContentLoaded', () => renderPosts('all'));
+document.addEventListener('DOMContentLoaded', () => {
+  renderPosts('all');
+
+  // Buttery smooth marquee (time-based, constant speed)
+  const marquee = document.querySelector('.feed-marquee');
+  if (marquee) {
+    let x = 0;
+    const pxPerSecond = 100;
+    let lastTime = performance.now();
+    const marqueeTick = (now) => {
+      const delta = (now - lastTime) / 1000;
+      lastTime = now;
+      x -= pxPerSecond * delta;
+      const halfWidth = marquee.scrollWidth / 2;
+      if (Math.abs(x) >= halfWidth) x += halfWidth;
+      marquee.style.transform = `translate3d(${x}px, 0, 0)`;
+      requestAnimationFrame(marqueeTick);
+    };
+    requestAnimationFrame(marqueeTick);
+  }
+
+  // Dual-video seamless crossfade loop
+  const vA = document.getElementById('vid-a');
+  const vB = document.getElementById('vid-b');
+  if (!vA || !vB) return;
+
+  const maxOp = 0.75;
+  const fade = 2.5; // crossfade duration in seconds
+  let active = vA, standby = vB;
+
+  function startLoop() {
+    active.currentTime = 0;
+    active.play();
+    active.style.opacity = String(maxOp);
+    standby.style.opacity = '0';
+    standby.pause();
+  }
+
+  vA.addEventListener('loadeddata', () => { if (vB.readyState >= 2) startLoop(); });
+  vB.addEventListener('loadeddata', () => { if (vA.readyState >= 2) startLoop(); });
+  vA.load(); vB.load();
+
+  const tick = () => {
+    if (active.duration && active.currentTime > 0) {
+      const left = active.duration - active.currentTime;
+      if (left <= fade) {
+        // Fade out active, fade in standby
+        const progress = 1 - (left / fade);
+        active.style.opacity = String((1 - progress) * maxOp);
+        if (standby.paused) {
+          standby.currentTime = 0;
+          standby.play();
+        }
+        standby.style.opacity = String(progress * maxOp);
+      }
+    }
+    requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+
+  // Swap roles when active ends
+  function swap(ended) {
+    const temp = active;
+    active = standby;
+    standby = temp;
+    active.style.opacity = String(maxOp);
+    standby.style.opacity = '0';
+    standby.pause();
+  }
+  vA.addEventListener('ended', swap);
+  vB.addEventListener('ended', swap);
+});
 </script>
 </body>
 </html>
