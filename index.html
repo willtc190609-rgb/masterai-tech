@@ -100,25 +100,25 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 
 .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
 
-/* ── HERO ── cinematic full-screen */
-.hero { padding-top: 140px; padding-bottom: 60px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-.hero-eyebrow { font-family: var(--font-mono); font-size: 12px; font-weight: 700; color: var(--red); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 28px; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) .2s forwards; }
-.hero-h1 { font-family: var(--font-display); font-size: clamp(52px,8vw,110px); font-weight: 800; line-height: 0.95; letter-spacing: -5px; color: var(--text-primary); margin-bottom: 36px; max-width: 1000px; }
-.hero-h1 .line { display: block; opacity: 0; transform: translateY(70px); animation: stag 1s var(--ease) forwards; }
+/* ── HERO ── split layout: image left, text right */
+.hero { padding-top: 120px; padding-bottom: 60px; min-height: 100vh; display: flex; align-items: center; }
+.hero-inner { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; width: 100%; }
+.hero-h1 { font-family: var(--font-display); font-size: clamp(32px,3.8vw,56px); font-weight: 800; line-height: 1.05; letter-spacing: -2.5px; color: var(--text-primary); margin-bottom: 20px; }
+.hero-h1 .line { display: block; opacity: 0; transform: translateY(40px); animation: stag 1s var(--ease) forwards; }
 .hero-h1 .line:nth-child(1) { animation-delay: .3s } .hero-h1 .line:nth-child(2) { animation-delay: .5s } .hero-h1 .line:nth-child(3) { animation-delay: .7s }
 .accent { color: var(--red); }
 @keyframes stag { to { opacity: 1; transform: translateY(0) } }
-.hero-sub { font-size: 19px; line-height: 1.65; color: var(--text-secondary); max-width: 520px; margin-bottom: 40px; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) .85s forwards; }
+.hero-sub { font-size: 16px; line-height: 1.65; color: var(--text-secondary); max-width: 440px; margin-bottom: 28px; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) .85s forwards; }
 .hero-ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) 1s forwards; }
-.btn-solid { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 15px; font-weight: 600; text-decoration: none; padding: 16px 32px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
+.btn-solid { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
 .btn-solid:hover { background: var(--red); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 30px var(--red-glow); }
-.btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text-primary); border: 1.5px solid var(--border); font-family: var(--font-body); font-size: 15px; font-weight: 600; text-decoration: none; padding: 15px 28px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
+.btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text-primary); border: 1.5px solid var(--border); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 13px 24px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
 .btn-outline:hover { border-color: var(--text-primary); background: rgba(0,0,0,.03); }
 
-/* ── HERO CINEMATIC IMAGE (full-bleed with parallax) ── */
-.hero-cinema { width: 100vw; margin-left: calc(-50vw + 50%); margin-top: 72px; height: 70vh; position: relative; overflow: hidden; opacity: 0; transform: scale(.95); animation: stag 1.2s var(--ease) 1.2s forwards; }
-.hero-cinema img { width: 100%; height: 130%; object-fit: cover; position: absolute; top: -15%; left: 0; filter: contrast(1.08) brightness(.88) saturate(.85); }
-.hero-cinema-fade { position: absolute; inset: 0; background: linear-gradient(to bottom, var(--bg) 0%, transparent 15%, transparent 75%, var(--bg) 100%); pointer-events: none; }
+/* ── HERO IMAGE (left side with parallax) ── */
+.hero-visual { border-radius: var(--radius-xl); overflow: hidden; aspect-ratio: 4/5; position: relative; box-shadow: 0 16px 50px rgba(0,0,0,.1); opacity: 0; transform: scale(.95); animation: stag 1.2s var(--ease) .2s forwards; }
+.hero-visual img { width: 100%; height: 130%; object-fit: cover; position: absolute; top: -15%; left: 0; filter: contrast(1.08) brightness(.88) saturate(.85); }
+.hero-visual-fade { position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 2%, transparent 30%); pointer-events: none; }
 
 /* ── STATS MARQUEE ── */
 .stats-strip { padding: 64px 0; border-bottom: 1px solid var(--border); overflow: hidden; }
@@ -206,7 +206,8 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 /* ── RESPONSIVE ── */
 @media (max-width:992px) {
   .hero { min-height: auto; padding-top: 120px; }
-  .hero-cinema { height: 50vh; }
+  .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+  .hero-visual { max-width: 400px; aspect-ratio: 3/4; }
   .mission-block { grid-template-columns: 1fr; min-height: auto; }
   .mission-block.reverse { direction: ltr; }
   .mission-img-wrap { height: 50vh; position: relative; }
@@ -215,14 +216,12 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
   .mission-block:nth-child(even) .mission-content { margin-left: 0; }
   .posts-grid { grid-template-columns: repeat(2, 1fr); }
   .post-card:first-child { grid-column: span 2; }
-  .story-card { flex-direction: column; align-items: flex-start; }
-  .btn-pill { margin-left: 0; width: 100%; justify-content: center; }
   .nav-menu { display: none; }
 }
 @media (max-width:680px) {
   .hero { padding-top: 110px; }
-  .hero-h1 { letter-spacing: -3px; }
-  .hero-cinema { height: 40vh; }
+  .hero-h1 { letter-spacing: -1.5px; }
+  .hero-visual { max-width: 100%; aspect-ratio: 16/10; }
   .mission-img-wrap { height: 40vh; }
   .manifesto-box { padding: 48px 24px; }
   .manifesto-wrap { padding: 60px 16px; }
@@ -277,21 +276,26 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
   <!-- ═══ HERO ═══ -->
   <section class="hero">
     <div class="container">
-      <h1 class="hero-h1">
-        <span class="line">We tear apart GPUs,</span>
-        <span class="line">dissect AI models,</span>
-        <span class="line">and explain them <span class="accent">from scratch.</span></span>
-      </h1>
-      <p class="hero-sub">Independent research straight from source code and research papers. No sponsors. No hype. No fluff.</p>
-      <div class="hero-ctas">
-        <a href="#feed" class="btn-solid">Explore Breakdowns <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        <a href="#mission" class="btn-outline">Our Mission</a>
+      <div class="hero-inner">
+        <!-- Image left -->
+        <div class="hero-visual">
+          <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&q=85" alt="Retro tech hardware" class="parallax-img" data-speed="0.15">
+          <div class="hero-visual-fade"></div>
+        </div>
+        <!-- Text right -->
+        <div class="hero-text">
+          <h1 class="hero-h1">
+            <span class="line">We tear apart GPUs,</span>
+            <span class="line">dissect AI models,</span>
+            <span class="line">and explain them <span class="accent">from scratch.</span></span>
+          </h1>
+          <p class="hero-sub">Independent research straight from source code and research papers. No sponsors. No hype. No fluff.</p>
+          <div class="hero-ctas">
+            <a href="#feed" class="btn-solid">Explore Breakdowns <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+            <a href="#mission" class="btn-outline">Our Mission</a>
+          </div>
+        </div>
       </div>
-    </div>
-    <!-- Full-bleed cinematic image with parallax -->
-    <div class="hero-cinema">
-      <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1600&q=85" alt="Retro tech hardware" class="parallax-img" data-speed="0.3">
-      <div class="hero-cinema-fade"></div>
     </div>
   </section>
 
