@@ -397,7 +397,6 @@ function renderPosts(cat) {
   `).join('');
   // Observe new cards for scroll reveal - trigger immediately for visible ones
   c.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
-  document.getElementById('feed-counter').textContent = `${window.MASTERAI_POSTS.length} POSTS INDEXED`;
 }
 function filterPosts(cat, btn) {
   document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
