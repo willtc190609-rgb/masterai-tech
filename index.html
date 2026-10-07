@@ -100,16 +100,15 @@ body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 
 .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
 
-/* ── HERO ── text only, right-aligned */
+/* ── HERO ── text only, left-aligned */
 .hero { padding-top: 160px; padding-bottom: 80px; min-height: 90vh; display: flex; align-items: center; }
-.hero .container { display: flex; flex-direction: column; align-items: flex-end; }
-.hero-h1 { font-family: var(--font-display); font-size: clamp(44px,6vw,88px); font-weight: 800; line-height: 1.0; letter-spacing: -4px; color: var(--text-primary); margin-bottom: 28px; max-width: 800px; text-align: right; }
+.hero-h1 { font-family: var(--font-display); font-size: clamp(44px,6vw,88px); font-weight: 800; line-height: 1.0; letter-spacing: -4px; color: var(--text-primary); margin-bottom: 28px; max-width: 800px; }
 .hero-h1 .line { display: block; opacity: 0; transform: translateY(50px); animation: stag 1s var(--ease) forwards; }
 .hero-h1 .line:nth-child(1) { animation-delay: .3s } .hero-h1 .line:nth-child(2) { animation-delay: .5s } .hero-h1 .line:nth-child(3) { animation-delay: .7s }
 .accent { color: var(--red); }
 @keyframes stag { to { opacity: 1; transform: translateY(0) } }
-.hero-sub { font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 480px; margin-bottom: 32px; text-align: right; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) .85s forwards; }
-.hero-ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; justify-content: flex-end; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) 1s forwards; }
+.hero-sub { font-size: 17px; line-height: 1.65; color: var(--text-secondary); max-width: 480px; margin-bottom: 32px; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) .85s forwards; }
+.hero-ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) 1s forwards; }
 .btn-solid { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
 .btn-solid:hover { background: var(--red); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 30px var(--red-glow); }
 .btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text-primary); border: 1.5px solid var(--border); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 13px 24px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
