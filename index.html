@@ -551,25 +551,22 @@ document.addEventListener('DOMContentLoaded', () => {
 gsap.registerPlugin(ScrollTrigger);
 const bgCanvas = document.querySelector('#bg-canvas');
 if (bgCanvas) {
+  const isMobile = innerWidth < 768;
   const scene = new THREE.Scene();
   const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 1000);
   camera.position.z = 14;
-  const renderer = new THREE.WebGLRenderer({ canvas: bgCanvas, alpha: true, antialias: true });
+  const renderer = new THREE.WebGLRenderer({ canvas: bgCanvas, alpha: true, antialias: !isMobile });
   renderer.setSize(innerWidth, innerHeight);
-  renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+  renderer.setPixelRatio(isMobile ? 1 : Math.min(devicePixelRatio, 2));
 
   scene.add(new THREE.AmbientLight(0xffffff, 0.8));
   const d1 = new THREE.DirectionalLight(0xffffff, 1.2);
   d1.position.set(5, 10, 7);
   scene.add(d1);
-  const d2 = new THREE.DirectionalLight(0xdbe2ef, 0.5);
-  d2.position.set(-5, -5, -5);
-  scene.add(d2);
 
-  // ponytail: MeshPhysicalMaterial clearcoat. Ceiling: weak mobile GPUs. Upgrade: MeshStandardMaterial fallback.
   const spiral = new THREE.Mesh(
-    new THREE.TorusKnotGeometry(3, 0.75, 150, 20, 2, 5),
-    new THREE.MeshPhysicalMaterial({ color: 0xefefef, roughness: 0.25, metalness: 0.05, clearcoat: 0.3, clearcoatRoughness: 0.1 })
+    new THREE.TorusKnotGeometry(3, 0.75, isMobile ? 64 : 150, isMobile ? 10 : 20, 2, 5),
+    new THREE.MeshStandardMaterial({ color: 0xefefef, roughness: 0.3, metalness: 0.05 })
   );
   scene.add(spiral);
 
@@ -579,13 +576,18 @@ if (bgCanvas) {
   });
   gsap.to(spiral.position, { y: 0.25, duration: 2.5, repeat: -1, yoyo: true, ease: "sine.inOut" });
 
-  // ponytail: continuous RAF loop. Ceiling: idle GPU draw. Upgrade: GSAP ticker only.
-  (function anim() { requestAnimationFrame(anim); renderer.render(scene, camera); })();
+  let needsRender = true;
+  gsap.ticker.add(() => { needsRender = true; });
+  (function anim() {
+    requestAnimationFrame(anim);
+    if (needsRender) { renderer.render(scene, camera); needsRender = false; }
+  })();
 
   addEventListener('resize', () => {
     camera.aspect = innerWidth / innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(innerWidth, innerHeight);
+    needsRender = true;
   });
 }
 </script>
