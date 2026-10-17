@@ -10,7 +10,8 @@
 <meta name="description" content="Slate Core (SLTC) (@slatecore): Independent research, model breakdowns, computer science fundamentals, and developer intelligence.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 #bg-canvas {
@@ -86,7 +87,7 @@ main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 
 .parallax-img { will-change: transform; transition: none; }
 
 /* ── TOP BAR ── */
-.top-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,240,235,0.40); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(224,217,208,0.2); padding: 14px 0; }
+.top-header { position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(245,240,235,0.40); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid rgba(224,217,208,0.2); padding: 14px 0; will-change: transform; transform: translateZ(0); }
 .header-container { max-width: 1280px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: center; align-items: center; gap: 32px; }
 .brand-unit { display: flex; align-items: center; gap: 14px; text-decoration: none; }
 .brand-symbol { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
@@ -97,9 +98,9 @@ main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 
 .status-beacon { width: 4px; height: 4px; border-radius: 50%; background: var(--red); box-shadow: 0 0 4px var(--red); animation: pulse 2s infinite; }
 @keyframes pulse { 0%,100% { transform: scale(.95); opacity: .8 } 50% { transform: scale(1.3); opacity: 1 } }
 .nav-menu { display: flex; align-items: center; gap: 4px; }
-.nav-btn { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--text-secondary); text-decoration: none; padding: 8px 16px; border-radius: var(--radius-pill); transition: all .25s var(--ease); }
+.nav-btn { font-family: var(--font-body); font-size: 14px; font-weight: 500; color: var(--text-secondary); text-decoration: none; padding: 8px 16px; border-radius: var(--radius-pill); transition: color .25s var(--ease), background-color .25s var(--ease); }
 .nav-btn:hover { color: var(--text-primary); background: rgba(0,0,0,0.04); }
-.ig-action-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 10px 24px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
+.ig-action-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 10px 24px; border-radius: var(--radius-pill); transition: background-color .3s var(--ease), color .3s, transform .3s var(--ease), box-shadow .3s; }
 .ig-action-btn:hover { background: var(--red); color: #fff; transform: translateY(-1px); box-shadow: 0 8px 24px var(--red-glow); }
 
 .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
@@ -114,9 +115,9 @@ main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 
 @keyframes stag { to { opacity: 1; transform: translateY(0) } }
 .hero-sub { font-size: 15px; line-height: 1.65; color: var(--text-secondary); max-width: 520px; margin-bottom: 28px; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) .85s forwards; }
 .hero-ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) 1s forwards; }
-.btn-solid { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
+.btn-solid { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: var(--radius-pill); transition: background-color .3s var(--ease), color .3s, transform .3s var(--ease), box-shadow .3s; }
 .btn-solid:hover { background: var(--red); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 30px var(--red-glow); }
-.btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text-primary); border: 1.5px solid var(--border); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 13px 24px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
+.btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text-primary); border: 1.5px solid var(--border); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 13px 24px; border-radius: var(--radius-pill); transition: border-color .3s, background-color .3s; }
 .btn-outline:hover { border-color: var(--text-primary); background: rgba(0,0,0,.03); }
 
 /* Feed header inside hero */
@@ -141,7 +142,7 @@ main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 
 
 /* ── STORY BANNER ── */
 .story-section { padding: 48px 0; }
-.story-card { background: var(--surface); border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 32px 40px; display: flex; align-items: center; gap: 28px; transition: all .4s var(--ease); box-shadow: 0 2px 20px rgba(0,0,0,.04); }
+.story-card { background: var(--surface); border: 1px solid var(--border-light); border-radius: var(--radius-xl); padding: 32px 40px; display: flex; align-items: center; gap: 28px; transition: transform .4s var(--ease), box-shadow .4s, border-color .4s; box-shadow: 0 2px 20px rgba(0,0,0,.04); will-change: transform; }
 .story-card:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(0,0,0,.08); border-color: var(--red); }
 .story-ring { position: relative; width: 56px; height: 56px; flex-shrink: 0; }
 .story-ring-bg { width: 100%; height: 100%; border-radius: 50%; padding: 3px; background: linear-gradient(135deg, var(--red), var(--orange), var(--red-deep)); }
@@ -150,28 +151,28 @@ main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 
 .story-text { flex: 1; }
 .story-text h3 { font-family: var(--font-display); font-size: 24px; font-weight: 800; letter-spacing: -1px; margin-bottom: 4px; }
 .story-text p { font-size: 15px; color: var(--text-secondary); }
-.btn-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 24px; border-radius: var(--radius-pill); transition: all .3s var(--ease); white-space: nowrap; margin-left: auto; flex-shrink: 0; }
+.btn-pill { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 12px 24px; border-radius: var(--radius-pill); transition: background-color .3s var(--ease), color .3s, transform .3s var(--ease), box-shadow .3s; white-space: nowrap; margin-left: auto; flex-shrink: 0; }
 .btn-pill:hover { background: var(--red); color: #fff; transform: translateY(-2px); box-shadow: 0 8px 24px var(--red-glow); }
 
 /* ── POSTS SECTION ── */
-.posts-section { padding: 80px 0; }
+.posts-section { padding: 80px 0; content-visibility: auto; contain-intrinsic-size: auto 800px; }
 .posts-section .section-top { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 48px; flex-wrap: wrap; gap: 20px; }
 .section-heading { font-family: var(--font-display); font-size: clamp(36px,4.5vw,56px); font-weight: 800; letter-spacing: -3px; }
 .filter-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
-.filter-btn { background: transparent; border: 1.5px solid var(--border); color: var(--text-secondary); font-family: var(--font-body); font-size: 13px; font-weight: 600; padding: 8px 20px; border-radius: var(--radius-pill); cursor: pointer; transition: all .25s var(--ease); }
+.filter-btn { background: transparent; border: 1.5px solid var(--border); color: var(--text-secondary); font-family: var(--font-body); font-size: 13px; font-weight: 600; padding: 8px 20px; border-radius: var(--radius-pill); cursor: pointer; transition: background-color .25s var(--ease), border-color .25s, color .25s; }
 .filter-btn.active, .filter-btn:hover { background: var(--text-primary); border-color: var(--text-primary); color: var(--bg); }
 
 /* Vertical grid with staggered reveal */
 .posts-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-.post-card { background: var(--surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: all .4s var(--ease); box-shadow: 0 8px 30px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.03); }
+.post-card { background: var(--surface); border: 1px solid var(--border-light); border-radius: var(--radius-lg); overflow: hidden; display: flex; flex-direction: column; transition: transform .4s var(--ease), box-shadow .4s, border-color .4s; box-shadow: 0 8px 30px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.03); will-change: transform; contain: layout style paint; }
 .post-card:first-child { grid-column: span 2; }
 .post-card:hover { transform: translateY(-8px); box-shadow: 0 24px 60px rgba(0,0,0,.12), 0 8px 20px rgba(0,0,0,.06); border-color: var(--red); }
 .pcard-thumb { height: 260px; position: relative; overflow: hidden; background: var(--bg-warm); }
 .post-card:first-child .pcard-thumb { height: 340px; }
-.pcard-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .6s var(--ease); }
-.post-card:hover .pcard-thumb img { transform: scale(1.05); }
-.pcard-tag-l { position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border: 1px solid var(--border-light); border-radius: var(--radius-pill); padding: 4px 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 800; color: var(--red); }
-.pcard-tag-r { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,.92); backdrop-filter: blur(8px); border: 1px solid var(--border-light); border-radius: var(--radius-pill); padding: 4px 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--text-secondary); }
+.pcard-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: center top; transition: transform .6s var(--ease); will-change: transform; transform: translateZ(0); }
+.post-card:hover .pcard-thumb img { transform: scale(1.05) translateZ(0); }
+.pcard-tag-l { position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,.95); border: 1px solid var(--border-light); border-radius: var(--radius-pill); padding: 4px 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 800; color: var(--red); }
+.pcard-tag-r { position: absolute; top: 14px; right: 14px; background: rgba(255,255,255,.95); border: 1px solid var(--border-light); border-radius: var(--radius-pill); padding: 4px 12px; font-family: var(--font-mono); font-size: 11px; font-weight: 700; color: var(--text-secondary); }
 .pcard-body { padding: 26px; display: flex; flex-direction: column; flex: 1; }
 .pcard-title { font-family: var(--font-display); font-size: 20px; font-weight: 700; letter-spacing: -.5px; line-height: 1.25; margin-bottom: 10px; }
 .pcard-desc { font-size: 14.5px; color: var(--text-secondary); line-height: 1.55; margin-bottom: 18px; }
@@ -188,7 +189,7 @@ main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 
 .mission-block.reverse { direction: rtl; }
 .mission-block.reverse > * { direction: ltr; }
 .mission-img-wrap { position: relative; overflow: hidden; border-radius: 16px; box-shadow: 0 20px 50px rgba(0,0,0,.4), 0 8px 20px rgba(0,0,0,.3); }
-.mission-img-wrap img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; filter: contrast(1.08) brightness(.88) saturate(.85); }
+.mission-img-wrap img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; transform: translateZ(0); }
 .mission-content { display: flex; flex-direction: column; justify-content: center; padding: 80px 64px; max-width: 580px; }
 .mission-block:nth-child(even) .mission-content { margin-left: auto; }
 .mission-content h3 { font-family: var(--font-display); font-size: clamp(28px,3vw,42px); font-weight: 800; letter-spacing: -2px; line-height: 1.08; margin-bottom: 18px; }
@@ -200,7 +201,7 @@ main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 
 .manifesto-box::before { content: ''; position: absolute; top: -40%; right: -15%; width: 500px; height: 500px; background: radial-gradient(circle, rgba(220,38,38,.15) 0%, transparent 60%); pointer-events: none; }
 .manifesto-title { font-family: var(--font-display); font-size: clamp(36px,4.5vw,56px); font-weight: 800; letter-spacing: -3px; color: var(--bg); margin-bottom: 20px; position: relative; }
 .manifesto-desc { font-size: 18px; color: rgba(245,240,235,.6); max-width: 600px; margin: 0 auto 40px; line-height: 1.7; position: relative; }
-.btn-inv { display: inline-flex; align-items: center; gap: 8px; background: var(--bg); color: var(--text-primary); font-family: var(--font-body); font-size: 15px; font-weight: 600; text-decoration: none; padding: 16px 32px; border-radius: var(--radius-pill); transition: all .3s var(--ease); position: relative; }
+.btn-inv { display: inline-flex; align-items: center; gap: 8px; background: var(--bg); color: var(--text-primary); font-family: var(--font-body); font-size: 15px; font-weight: 600; text-decoration: none; padding: 16px 32px; border-radius: var(--radius-pill); transition: background-color .3s var(--ease), color .3s, transform .3s var(--ease), box-shadow .3s; position: relative; }
 .btn-inv:hover { background: var(--red); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 30px rgba(220,38,38,.3); }
 
 /* ── FOOTER ── */
@@ -265,6 +266,11 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
   .foot-1, .foot-2 { flex-direction: column; text-align: center; gap: 8px; }
   .foot-built { font-size: 13px; }
   footer { padding: 28px 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+  html { scroll-behavior: auto; }
+  .rv, .rv-left, .rv-right, .rv-scale { opacity: 1 !important; transform: none !important; }
 }
 </style>
 </head>
@@ -355,7 +361,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
         <p>When a new AI model drops or a rogue agent goes haywire, we break it down within hours&thinsp;&mdash;&thinsp;with sources, not speculation.</p>
       </div>
       <div class="mission-img-wrap rv-scale">
-        <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=1000&q=85" alt="Newspaper" loading="lazy" class="parallax-img" data-speed="0.2">
+        <img src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=1000&q=85" alt="Newspaper" loading="lazy" decoding="async" class="parallax-img" data-speed="0.2">
       </div>
     </div>
 
@@ -365,7 +371,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
         <p>CPUs, GPUs, SSDs, RAM&thinsp;&mdash;&thinsp;we explain how your computer actually works using real benchmarks and diagrams, not marketing slides.</p>
       </div>
       <div class="mission-img-wrap rv-scale">
-        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1000&q=85" alt="Code on screen" loading="lazy" class="parallax-img" data-speed="0.2">
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=1000&q=85" alt="Code on screen" loading="lazy" decoding="async" class="parallax-img" data-speed="0.2">
       </div>
     </div>
 
@@ -375,7 +381,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
         <p>Neural networks, transformers, prompt engineering&thinsp;&mdash;&thinsp;explained so clearly your grandma could follow along.</p>
       </div>
       <div class="mission-img-wrap rv-scale">
-        <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=1000&q=85" alt="Abstract neural tech" loading="lazy" class="parallax-img" data-speed="0.2">
+        <img src="https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=1000&q=85" alt="Abstract neural tech" loading="lazy" decoding="async" class="parallax-img" data-speed="0.2">
       </div>
     </div>
 
@@ -451,7 +457,7 @@ function renderPosts(cat) {
   c.innerHTML = list.map((p, i) => `
     <article class="post-card rv" style="transition-delay:${Math.min(i * 0.08, 0.4)}s" data-category="${p.category}">
       <div class="pcard-thumb">
-        <img src="${p.image}" alt="${p.title}">
+        <img src="${p.image}" alt="${p.title}" loading="lazy" decoding="async">
       </div>
       <div class="pcard-body">
         <h3 class="pcard-title">${p.title}</h3>
@@ -544,9 +550,9 @@ document.addEventListener('DOMContentLoaded', () => {
   vB.addEventListener('ended', swap);
 });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
 const bgCanvas = document.querySelector('#bg-canvas');
@@ -565,7 +571,7 @@ if (bgCanvas) {
   scene.add(d1);
 
   const spiral = new THREE.Mesh(
-    new THREE.TorusKnotGeometry(3, 0.75, isMobile ? 64 : 150, isMobile ? 10 : 20, 2, 5),
+    new THREE.TorusKnotGeometry(3, 0.75, isMobile ? 48 : 100, isMobile ? 8 : 16, 2, 5),
     new THREE.MeshStandardMaterial({ color: 0xefefef, roughness: 0.3, metalness: 0.05 })
   );
   scene.add(spiral);
