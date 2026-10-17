@@ -14,9 +14,6 @@
 <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet"></noscript>
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-#bg-canvas {
-  position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
-}
 :root {
   --bg: #f5f0eb;
   --bg-warm: #ebe5de;
@@ -45,32 +42,20 @@ html { scroll-behavior: smooth; background: var(--bg); color: var(--text-primary
 body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 1; }
 
-/* ── VIDEO BACKGROUND (hero only) ── */
+/* ── PLEXUS BACKGROUND (hero only) ── */
 .hero { position: relative; overflow: hidden; }
-.hero-video-bg {
-  position: absolute; inset: 0; z-index: 0;
-}
-.hero-video-bg video {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover; opacity: 0;
-  filter: saturate(1.2) contrast(1.1) brightness(0.9);
-  transition: opacity 2s var(--ease-silk);
-}
-/* Red color grade overlay */
-.hero-video-bg::before {
-  content: ''; position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(135deg, rgba(180,20,20,0.18) 0%, rgba(192,192,192,0.12) 50%, rgba(180,20,20,0.15) 100%);
-  mix-blend-mode: multiply;
+#plexus-canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;
 }
 /* Bottom fade to page bg */
-.hero-video-bg::after {
-  content: ''; position: absolute; inset: 0; z-index: 2;
-  background: linear-gradient(to bottom, transparent 0%, transparent 50%, var(--bg) 100%);
+.hero-fade {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(to bottom, transparent 0%, transparent 55%, var(--bg) 100%);
 }
 /* Vignette edges */
 .hero-vignette {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  box-shadow: inset 0 0 150px 60px rgba(0,0,0,0.25);
+  box-shadow: inset 0 0 150px 60px rgba(0,0,0,0.15);
 }
 .hero .container { position: relative; z-index: 3; }
 
@@ -251,7 +236,6 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
   .hero-h1 { font-size: clamp(26px, 8vw, 38px); letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 16px; }
   .hero-sub { font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
   .btn-solid, .btn-outline { font-size: 13px; padding: 12px 22px; }
-  .hero-video-bg video { opacity: 0.6; }
   .mission-img-wrap { height: 35vh; }
   .mission-content { padding: 32px 20px; }
   .mission-content h3 { font-size: 22px; }
@@ -289,8 +273,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 </head>
 <body>
 
-<!-- 3D Vortex Background -->
-<canvas id="bg-canvas"></canvas>
+<!-- 3D Plexus Background -->
 
 <!-- TOP BAR -->
 <header class="top-header">
@@ -315,14 +298,8 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
-    <div class="hero-video-bg">
-      <video id="vid-a" muted playsinline>
-        <source src="assets/hero-bg.mp4" type="video/mp4">
-      </video>
-      <video id="vid-b" muted playsinline>
-        <source src="assets/hero-bg.mp4" type="video/mp4">
-      </video>
-    </div>
+    <canvas id="plexus-canvas"></canvas>
+    <div class="hero-fade"></div>
     <div class="hero-vignette"></div>
     <div class="container">
       <h1 class="hero-h1">
@@ -534,104 +511,161 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(marqueeTick);
   }
 
-  // Dual-video seamless crossfade loop
-  const vA = document.getElementById('vid-a');
-  const vB = document.getElementById('vid-b');
-  if (!vA || !vB) return;
-
-  const maxOp = 0.75;
-  const fade = 2.5; // crossfade duration in seconds
-  let active = vA, standby = vB;
-
-  function startLoop() {
-    active.currentTime = 0;
-    active.play();
-    active.style.opacity = String(maxOp);
-    standby.style.opacity = '0';
-    standby.pause();
-  }
-
-  vA.addEventListener('loadeddata', () => { if (vB.readyState >= 2) startLoop(); });
-  vB.addEventListener('loadeddata', () => { if (vA.readyState >= 2) startLoop(); });
-  vA.load(); vB.load();
-
-  const tick = () => {
-    if (active.duration && active.currentTime > 0) {
-      const left = active.duration - active.currentTime;
-      if (left <= fade) {
-        // Fade out active, fade in standby
-        const progress = 1 - (left / fade);
-        active.style.opacity = String((1 - progress) * maxOp);
-        if (standby.paused) {
-          standby.currentTime = 0;
-          standby.play();
-        }
-        standby.style.opacity = String(progress * maxOp);
-      }
-    }
-    requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-
-  // Swap roles when active ends
-  function swap(ended) {
-    const temp = active;
-    active = standby;
-    standby = temp;
-    active.style.opacity = String(maxOp);
-    standby.style.opacity = '0';
-    standby.pause();
-  }
-  vA.addEventListener('ended', swap);
-  vB.addEventListener('ended', swap);
+  // Dual-video crossfade removed — replaced by plexus canvas below
 });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
 <script>
-gsap.registerPlugin(ScrollTrigger);
-const bgCanvas = document.querySelector('#bg-canvas');
-if (bgCanvas) {
+// ── Plexus Network Background ──
+(() => {
+  const canvas = document.getElementById('plexus-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
   const isMobile = innerWidth < 768;
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 1000);
-  camera.position.z = 14;
-  const renderer = new THREE.WebGLRenderer({ canvas: bgCanvas, alpha: true, antialias: !isMobile });
-  renderer.setSize(innerWidth, innerHeight);
-  renderer.setPixelRatio(isMobile ? 1 : Math.min(devicePixelRatio, 2));
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.8));
-  const d1 = new THREE.DirectionalLight(0xffffff, 1.2);
-  d1.position.set(5, 10, 7);
-  scene.add(d1);
+  let W, H, dpr;
+  function resize() {
+    dpr = isMobile ? 1 : Math.min(devicePixelRatio, 1.5);
+    W = canvas.width = canvas.clientWidth * dpr;
+    H = canvas.height = canvas.clientHeight * dpr;
+  }
+  resize();
+  addEventListener('resize', resize);
 
-  const spiral = new THREE.Mesh(
-    new THREE.TorusKnotGeometry(3, 0.75, isMobile ? 48 : 100, isMobile ? 8 : 16, 2, 5),
-    new THREE.MeshStandardMaterial({ color: 0xefefef, roughness: 0.3, metalness: 0.05 })
-  );
-  scene.add(spiral);
+  const NODE_COUNT = isMobile ? 50 : 120;
+  const CONNECT_DIST = isMobile ? 120 : 150;
+  const MOUSE_RADIUS = 180;
+  const BASE_SPEED = 0.25;
 
-  gsap.to(spiral.rotation, {
-    z: Math.PI * 2.5, x: Math.PI * 0.75, y: Math.PI * 0.5,
-    scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1.5 }
+  const COLORS = [
+    { r: 220, g: 38, b: 38 },
+    { r: 180, g: 170, b: 158 },
+    { r: 200, g: 192, b: 180 },
+    { r: 160, g: 148, b: 135 },
+    { r: 220, g: 38, b: 38 },
+    { r: 140, g: 128, b: 115 },
+  ];
+
+  class Node {
+    constructor() {
+      this.x = Math.random() * W;
+      this.y = Math.random() * H;
+      const angle = Math.random() * Math.PI * 2;
+      const speed = BASE_SPEED + Math.random() * 0.35;
+      this.vx = Math.cos(angle) * speed;
+      this.vy = Math.sin(angle) * speed;
+      this.r = 1.5 + Math.random() * 2;
+      this.br = this.r;
+      this.c = COLORS[Math.floor(Math.random() * COLORS.length)];
+      this.op = 0.3 + Math.random() * 0.5;
+      this.ps = 0.5 + Math.random() * 1.5;
+      this.pp = Math.random() * Math.PI * 2;
+    }
+    update(t) {
+      this.x += this.vx;
+      this.y += this.vy;
+      if (this.x < -20) this.x = W + 20;
+      if (this.x > W + 20) this.x = -20;
+      if (this.y < -20) this.y = H + 20;
+      if (this.y > H + 20) this.y = -20;
+      this.r = this.br + Math.sin(t * this.ps + this.pp) * 0.5;
+      const dx = this.x - mx, dy = this.y - my;
+      const dist = Math.sqrt(dx * dx + dy * dy);
+      if (dist < MOUSE_RADIUS && dist > 0) {
+        const f = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.7;
+        this.vx += (dx / dist) * f;
+        this.vy += (dy / dist) * f;
+      }
+      const spd = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
+      if (spd > BASE_SPEED + 0.3) { this.vx *= 0.99; this.vy *= 0.99; }
+    }
+  }
+
+  const nodes = Array.from({ length: NODE_COUNT }, () => new Node());
+  let mx = -9999, my = -9999;
+  document.addEventListener('mousemove', e => {
+    const rect = canvas.getBoundingClientRect();
+    mx = (e.clientX - rect.left) * dpr;
+    my = (e.clientY - rect.top) * dpr;
   });
-  gsap.to(spiral.position, { y: 0.25, duration: 2.5, repeat: -1, yoyo: true, ease: "sine.inOut" });
+  canvas.addEventListener('mouseleave', () => { mx = -9999; my = -9999; });
 
-  let needsRender = true;
-  gsap.ticker.add(() => { needsRender = true; });
-  (function anim() {
-    requestAnimationFrame(anim);
-    if (needsRender) { renderer.render(scene, camera); needsRender = false; }
-  })();
+  const start = performance.now();
+  function draw() {
+    const t = (performance.now() - start) / 1000;
+    ctx.fillStyle = '#0d0b09';
+    ctx.fillRect(0, 0, W, H);
 
-  addEventListener('resize', () => {
-    camera.aspect = innerWidth / innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(innerWidth, innerHeight);
-    needsRender = true;
-  });
-}
+    // Subtle radial glow
+    const g = ctx.createRadialGradient(W * 0.35, H * 0.4, 0, W * 0.35, H * 0.4, W * 0.45);
+    g.addColorStop(0, 'rgba(220,38,38,0.025)');
+    g.addColorStop(1, 'transparent');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+
+    nodes.forEach(n => n.update(t));
+
+    // Connections
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const a = nodes[i], b = nodes[j];
+        const dx = a.x - b.x, dy = a.y - b.y;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < CONNECT_DIST) {
+          const alpha = (1 - dist / CONNECT_DIST) * 0.22;
+          const isRed = (a.c.r === 220 && a.c.g === 38) || (b.c.r === 220 && b.c.g === 38);
+          ctx.strokeStyle = isRed ? `rgba(220,38,38,${alpha * 0.7})` : `rgba(180,170,158,${alpha * 0.5})`;
+          ctx.lineWidth = (1 - dist / CONNECT_DIST) * 1.2;
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.stroke();
+        }
+      }
+    }
+
+    // Mouse connections
+    if (mx > 0 && my > 0) {
+      nodes.forEach(n => {
+        const dx = n.x - mx, dy = n.y - my;
+        const dist = Math.sqrt(dx * dx + dy * dy);
+        if (dist < MOUSE_RADIUS) {
+          ctx.strokeStyle = `rgba(220,38,38,${(1 - dist / MOUSE_RADIUS) * 0.3})`;
+          ctx.lineWidth = (1 - dist / MOUSE_RADIUS) * 1.5;
+          ctx.beginPath();
+          ctx.moveTo(mx, my);
+          ctx.lineTo(n.x, n.y);
+          ctx.stroke();
+        }
+      });
+    }
+
+    // Nodes
+    nodes.forEach(n => {
+      const { r, g, b } = n.c;
+      // Glow
+      const gl = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
+      gl.addColorStop(0, `rgba(${r},${g},${b},${n.op * 0.12})`);
+      gl.addColorStop(1, 'transparent');
+      ctx.fillStyle = gl;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
+      ctx.fill();
+      // Core
+      ctx.fillStyle = `rgba(${r},${g},${b},${n.op})`;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
+      ctx.fill();
+      // Bright center
+      ctx.fillStyle = `rgba(255,255,255,${n.op * 0.35})`;
+      ctx.beginPath();
+      ctx.arc(n.x, n.y, n.r * 0.35, 0, Math.PI * 2);
+      ctx.fill();
+    });
+
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
 </body>
 </html>
