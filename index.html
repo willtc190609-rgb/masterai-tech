@@ -42,9 +42,9 @@ html { scroll-behavior: smooth; background: var(--bg); color: var(--text-primary
 body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
 main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 1; }
 
-/* ── PLEXUS BACKGROUND (hero only) ── */
+/* ── WAVES BACKGROUND (hero only) ── */
 .hero { position: relative; overflow: hidden; }
-#plexus-canvas {
+#wave-canvas {
   position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;
 }
 /* Bottom fade to page bg */
@@ -273,7 +273,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 </head>
 <body>
 
-<!-- 3D Plexus Background -->
+<!-- Waves Background -->
 
 <!-- TOP BAR -->
 <header class="top-header">
@@ -298,7 +298,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
-    <canvas id="plexus-canvas"></canvas>
+    <canvas id="wave-canvas"></canvas>
     <div class="hero-fade"></div>
     <div class="hero-vignette"></div>
     <div class="container">
@@ -511,13 +511,13 @@ document.addEventListener('DOMContentLoaded', () => {
     requestAnimationFrame(marqueeTick);
   }
 
-  // Dual-video crossfade removed — replaced by plexus canvas below
+  // Video crossfade removed — replaced by wave canvas below
 });
 </script>
 <script>
-// ── Plexus Network Background ──
+// ── Waves, Ripples & Blurry Shapes Background ──
 (() => {
-  const canvas = document.getElementById('plexus-canvas');
+  const canvas = document.getElementById('wave-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   const isMobile = innerWidth < 768;
@@ -527,140 +527,142 @@ document.addEventListener('DOMContentLoaded', () => {
     dpr = isMobile ? 1 : Math.min(devicePixelRatio, 1.5);
     W = canvas.width = canvas.clientWidth * dpr;
     H = canvas.height = canvas.clientHeight * dpr;
+    resizeBuffer();
   }
+
+  // Noise functions
+  function hash(x, y) {
+    let h = x * 374761393 + y * 668265263;
+    h = (h ^ (h >> 13)) * 1274126177;
+    return ((h ^ (h >> 16)) & 0x7fffffff) / 0x7fffffff;
+  }
+  function smoothNoise(x, y) {
+    const ix = Math.floor(x), iy = Math.floor(y);
+    const fx = x - ix, fy = y - iy;
+    const sx = fx * fx * (3 - 2 * fx);
+    const sy = fy * fy * (3 - 2 * fy);
+    const a = hash(ix, iy), b = hash(ix + 1, iy);
+    const c = hash(ix, iy + 1), d = hash(ix + 1, iy + 1);
+    return a + (b - a) * sx + (c - a) * sy + (a - b - c + d) * sx * sy;
+  }
+  function fbm(x, y, octaves) {
+    let val = 0, amp = 0.5, freq = 1;
+    for (let i = 0; i < octaves; i++) {
+      val += amp * smoothNoise(x * freq, y * freq);
+      amp *= 0.5; freq *= 2.1;
+    }
+    return val;
+  }
+
+  // Offscreen buffer (1/4 res — natural blur)
+  const SCALE = isMobile ? 6 : 4;
+  const bCanvas = document.createElement('canvas');
+  const bCtx = bCanvas.getContext('2d');
+  function resizeBuffer() {
+    bCanvas.width = Math.ceil(W / SCALE);
+    bCanvas.height = Math.ceil(H / SCALE);
+  }
+
+  // Blurry shape blobs
+  const BLOBS = [];
+  for (let i = 0; i < 5; i++) {
+    BLOBS.push({
+      x: Math.random(), y: Math.random(),
+      vx: (Math.random() - 0.5) * 0.0003, vy: (Math.random() - 0.5) * 0.0003,
+      size: 0.15 + Math.random() * 0.2,
+      light: 12 + Math.random() * 10,
+      opacity: 0.06 + Math.random() * 0.08,
+      phase: Math.random() * Math.PI * 2,
+    });
+  }
+
+  // Film grain texture
+  const noiseCanvas = document.createElement('canvas');
+  noiseCanvas.width = noiseCanvas.height = 128;
+  const nCtx = noiseCanvas.getContext('2d');
+  const nData = nCtx.createImageData(128, 128);
+  for (let i = 0; i < nData.data.length; i += 4) {
+    const v = Math.random() * 14;
+    nData.data[i] = nData.data[i+1] = nData.data[i+2] = v;
+    nData.data[i+3] = 18;
+  }
+  nCtx.putImageData(nData, 0, 0);
+
   resize();
   addEventListener('resize', resize);
-
-  const NODE_COUNT = isMobile ? 50 : 120;
-  const CONNECT_DIST = isMobile ? 120 : 150;
-  const MOUSE_RADIUS = 180;
-  const BASE_SPEED = 0.25;
-
-  const COLORS = [
-    { r: 220, g: 38, b: 38 },
-    { r: 180, g: 170, b: 158 },
-    { r: 200, g: 192, b: 180 },
-    { r: 160, g: 148, b: 135 },
-    { r: 220, g: 38, b: 38 },
-    { r: 140, g: 128, b: 115 },
-  ];
-
-  class Node {
-    constructor() {
-      this.x = Math.random() * W;
-      this.y = Math.random() * H;
-      const angle = Math.random() * Math.PI * 2;
-      const speed = BASE_SPEED + Math.random() * 0.35;
-      this.vx = Math.cos(angle) * speed;
-      this.vy = Math.sin(angle) * speed;
-      this.r = 1.5 + Math.random() * 2;
-      this.br = this.r;
-      this.c = COLORS[Math.floor(Math.random() * COLORS.length)];
-      this.op = 0.3 + Math.random() * 0.5;
-      this.ps = 0.5 + Math.random() * 1.5;
-      this.pp = Math.random() * Math.PI * 2;
-    }
-    update(t) {
-      this.x += this.vx;
-      this.y += this.vy;
-      if (this.x < -20) this.x = W + 20;
-      if (this.x > W + 20) this.x = -20;
-      if (this.y < -20) this.y = H + 20;
-      if (this.y > H + 20) this.y = -20;
-      this.r = this.br + Math.sin(t * this.ps + this.pp) * 0.5;
-      const dx = this.x - mx, dy = this.y - my;
-      const dist = Math.sqrt(dx * dx + dy * dy);
-      if (dist < MOUSE_RADIUS && dist > 0) {
-        const f = (MOUSE_RADIUS - dist) / MOUSE_RADIUS * 0.7;
-        this.vx += (dx / dist) * f;
-        this.vy += (dy / dist) * f;
-      }
-      const spd = Math.sqrt(this.vx * this.vx + this.vy * this.vy);
-      if (spd > BASE_SPEED + 0.3) { this.vx *= 0.99; this.vy *= 0.99; }
-    }
-  }
-
-  const nodes = Array.from({ length: NODE_COUNT }, () => new Node());
-  let mx = -9999, my = -9999;
-  document.addEventListener('mousemove', e => {
-    const rect = canvas.getBoundingClientRect();
-    mx = (e.clientX - rect.left) * dpr;
-    my = (e.clientY - rect.top) * dpr;
-  });
-  canvas.addEventListener('mouseleave', () => { mx = -9999; my = -9999; });
 
   const start = performance.now();
   function draw() {
     const t = (performance.now() - start) / 1000;
-    ctx.fillStyle = '#0d0b09';
-    ctx.fillRect(0, 0, W, H);
+    const bW = bCanvas.width, bH = bCanvas.height;
 
-    // Subtle radial glow
-    const g = ctx.createRadialGradient(W * 0.35, H * 0.4, 0, W * 0.35, H * 0.4, W * 0.45);
-    g.addColorStop(0, 'rgba(220,38,38,0.025)');
-    g.addColorStop(1, 'transparent');
-    ctx.fillStyle = g;
-    ctx.fillRect(0, 0, W, H);
+    // Render wave field at low res
+    const imageData = bCtx.createImageData(bW, bH);
+    const data = imageData.data;
+    const timeX = t * 0.25, timeY = t * 0.18;
 
-    nodes.forEach(n => n.update(t));
-
-    // Connections
-    for (let i = 0; i < nodes.length; i++) {
-      for (let j = i + 1; j < nodes.length; j++) {
-        const a = nodes[i], b = nodes[j];
-        const dx = a.x - b.x, dy = a.y - b.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < CONNECT_DIST) {
-          const alpha = (1 - dist / CONNECT_DIST) * 0.22;
-          const isRed = (a.c.r === 220 && a.c.g === 38) || (b.c.r === 220 && b.c.g === 38);
-          ctx.strokeStyle = isRed ? `rgba(220,38,38,${alpha * 0.7})` : `rgba(180,170,158,${alpha * 0.5})`;
-          ctx.lineWidth = (1 - dist / CONNECT_DIST) * 1.2;
-          ctx.beginPath();
-          ctx.moveTo(a.x, a.y);
-          ctx.lineTo(b.x, b.y);
-          ctx.stroke();
-        }
+    for (let y = 0; y < bH; y++) {
+      for (let x = 0; x < bW; x++) {
+        const nx = x / bW, ny = y / bH;
+        const wave1 = fbm(nx * 3 + timeX, ny * 2.5 + timeY, 4);
+        const wave2 = fbm(nx * 5 - timeY * 0.7, ny * 4 + timeX * 0.5, 3);
+        const wave3 = fbm(nx * 1.5 + timeX * 0.3, ny * 1.5 - timeY * 0.6, 2);
+        let v = wave1 * 0.5 + wave2 * 0.3 + wave3 * 0.2;
+        const ridge = Math.abs(Math.sin(v * Math.PI * 6 + t * 1.2)) * 0.4;
+        v = v * 0.6 + ridge * 0.4;
+        const intensity = Math.pow(v, 1.8);
+        const c = Math.floor(intensity * 75 + ridge * 35);
+        const cb = Math.floor(intensity * 78 + ridge * 38);
+        const idx = (y * bW + x) * 4;
+        data[idx] = Math.min(c, 255);
+        data[idx+1] = Math.min(c, 255);
+        data[idx+2] = Math.min(cb, 255);
+        data[idx+3] = 255;
       }
     }
+    bCtx.putImageData(imageData, 0, 0);
 
-    // Mouse connections
-    if (mx > 0 && my > 0) {
-      nodes.forEach(n => {
-        const dx = n.x - mx, dy = n.y - my;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < MOUSE_RADIUS) {
-          ctx.strokeStyle = `rgba(220,38,38,${(1 - dist / MOUSE_RADIUS) * 0.3})`;
-          ctx.lineWidth = (1 - dist / MOUSE_RADIUS) * 1.5;
-          ctx.beginPath();
-          ctx.moveTo(mx, my);
-          ctx.lineTo(n.x, n.y);
-          ctx.stroke();
-        }
-      });
-    }
+    // Upscale to main canvas (naturally blurry)
+    ctx.imageSmoothingEnabled = true;
+    ctx.imageSmoothingQuality = 'high';
+    ctx.drawImage(bCanvas, 0, 0, W, H);
 
-    // Nodes
-    nodes.forEach(n => {
-      const { r, g, b } = n.c;
-      // Glow
-      const gl = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 4);
-      gl.addColorStop(0, `rgba(${r},${g},${b},${n.op * 0.12})`);
-      gl.addColorStop(1, 'transparent');
-      ctx.fillStyle = gl;
+    // Drifting blurry blobs
+    BLOBS.forEach(blob => {
+      blob.x += blob.vx * 4 + Math.sin(t * 0.4 + blob.phase) * 0.0002;
+      blob.y += blob.vy * 4 + Math.cos(t * 0.3 + blob.phase) * 0.0002;
+      if (blob.x < 0.05 || blob.x > 0.95) blob.vx *= -1;
+      if (blob.y < 0.05 || blob.y > 0.95) blob.vy *= -1;
+      const bx = blob.x * W, by = blob.y * H, br = blob.size * W;
+      const op = blob.opacity + Math.sin(t * 0.15 + blob.phase) * 0.02;
+      const g = ctx.createRadialGradient(bx, by, 0, bx, by, br);
+      g.addColorStop(0, `hsla(0,0%,${blob.light}%,${op})`);
+      g.addColorStop(0.3, `hsla(0,0%,${blob.light * 0.7}%,${op * 0.6})`);
+      g.addColorStop(0.7, `hsla(0,0%,${blob.light * 0.4}%,${op * 0.15})`);
+      g.addColorStop(1, 'transparent');
+      ctx.fillStyle = g;
       ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r * 4, 0, Math.PI * 2);
-      ctx.fill();
-      // Core
-      ctx.fillStyle = `rgba(${r},${g},${b},${n.op})`;
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
-      ctx.fill();
-      // Bright center
-      ctx.fillStyle = `rgba(255,255,255,${n.op * 0.35})`;
-      ctx.beginPath();
-      ctx.arc(n.x, n.y, n.r * 0.35, 0, Math.PI * 2);
+      ctx.arc(bx, by, br, 0, Math.PI * 2);
       ctx.fill();
     });
+
+    // Vignette
+    const vig = ctx.createRadialGradient(W * 0.5, H * 0.5, W * 0.15, W * 0.5, H * 0.5, W * 0.7);
+    vig.addColorStop(0, 'transparent');
+    vig.addColorStop(0.6, 'rgba(3,3,3,0.15)');
+    vig.addColorStop(1, 'rgba(3,3,3,0.5)');
+    ctx.fillStyle = vig;
+    ctx.fillRect(0, 0, W, H);
+
+    // Film grain
+    ctx.globalAlpha = 0.15;
+    ctx.fillStyle = ctx.createPattern(noiseCanvas, 'repeat');
+    ctx.save();
+    const gnx = (t * 9) % 128, gny = (t * 6) % 128;
+    ctx.translate(gnx, gny);
+    ctx.fillRect(-gnx, -gny, W, H);
+    ctx.restore();
+    ctx.globalAlpha = 1;
 
     requestAnimationFrame(draw);
   }
