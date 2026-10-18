@@ -14,7 +14,7 @@ const MASTERAI_POSTS = [
     image: "assets/covers/cover-post-013.png",
     date: "Oct 18, 2026",
     slidesCount: 3,
-    igLink: "https://www.instagram.com/slatecore/",
+    igLink: "https://www.instagram.com/p/DeoF3oAk7yl/",
     tags: ["RAMCrisis", "Hardware", "Semiconductors", "DataCenters"],
     accentColor: "#dc2626"
   },
@@ -28,7 +28,7 @@ const MASTERAI_POSTS = [
     image: "assets/covers/cover-post-012.png",
     date: "Oct 15, 2026",
     slidesCount: 3,
-    igLink: "https://www.instagram.com/slatecore/",
+    igLink: "https://www.instagram.com/p/DeoEMFqk6Zb/",
     tags: ["DataCenters", "AIWater", "Infrastructure", "Sustainability"],
     accentColor: "#dc2626"
   },
