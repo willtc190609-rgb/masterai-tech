@@ -1,9 +1,37 @@
 // =============================================================================
-// MASTERAI TECH — INSTAGRAM FEED & DATA REGISTRY
-// All 11 posts with Unsplash cover images & direct IG links
+// SLATE CORE (SLTC) — INSTAGRAM FEED & DATA REGISTRY
+// All 13 posts with cover images & direct IG links
 // =============================================================================
 
 const MASTERAI_POSTS = [
+  {
+    id: "post-013",
+    number: "POST #013",
+    category: "hardware",
+    categoryName: "HARDWARE CRUNCH",
+    title: "The World Is Running Out of RAM",
+    description: "AI models are doubling in size every few months, but memory factories only grow ~20% a year. Why the global hardware crunch is about to get worse.",
+    image: "assets/covers/cover-post-013.png",
+    date: "Oct 18, 2026",
+    slidesCount: 3,
+    igLink: "https://www.instagram.com/slatecore/",
+    tags: ["RAMCrisis", "Hardware", "Semiconductors", "DataCenters"],
+    accentColor: "#dc2626"
+  },
+  {
+    id: "post-012",
+    number: "POST #012",
+    category: "hardware",
+    categoryName: "AI INFRASTRUCTURE",
+    title: "Every AI Query Drinks Water",
+    description: "You type a question. The server heats up. Thousands of liters of water cool it down. The hidden environmental cost behind every AI response.",
+    image: "assets/covers/cover-post-012.png",
+    date: "Oct 15, 2026",
+    slidesCount: 3,
+    igLink: "https://www.instagram.com/slatecore/",
+    tags: ["DataCenters", "AIWater", "Infrastructure", "Sustainability"],
+    accentColor: "#dc2626"
+  },
   {
     id: "post-011",
     number: "POST #011",
