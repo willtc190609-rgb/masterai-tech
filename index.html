@@ -13,8 +13,59 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&family=Roboto:wght@400;500;700&family=JetBrains+Mono:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-#bg-canvas {
-  position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+
+/* ── TEXT REVEAL ANIMATION ── */
+.word-reveal .word {
+  display: inline-block; overflow: hidden; vertical-align: top;
+}
+.word-reveal .word .word-inner {
+  display: inline-block;
+  transform: translateY(105%);
+  transition: transform .7s cubic-bezier(.16,1,.3,1);
+}
+.word-reveal.revealed .word .word-inner {
+  transform: translateY(0);
+}
+.word-reveal .word:nth-child(1) .word-inner { transition-delay: 0s; }
+.word-reveal .word:nth-child(2) .word-inner { transition-delay: .04s; }
+.word-reveal .word:nth-child(3) .word-inner { transition-delay: .08s; }
+.word-reveal .word:nth-child(4) .word-inner { transition-delay: .12s; }
+.word-reveal .word:nth-child(5) .word-inner { transition-delay: .16s; }
+.word-reveal .word:nth-child(6) .word-inner { transition-delay: .2s; }
+.word-reveal .word:nth-child(7) .word-inner { transition-delay: .24s; }
+.word-reveal .word:nth-child(8) .word-inner { transition-delay: .28s; }
+.word-reveal .word:nth-child(9) .word-inner { transition-delay: .32s; }
+.word-reveal .word:nth-child(10) .word-inner { transition-delay: .36s; }
+.word-reveal .word:nth-child(11) .word-inner { transition-delay: .4s; }
+.word-reveal .word:nth-child(12) .word-inner { transition-delay: .44s; }
+
+/* ── LINE REVEAL (for paragraphs) ── */
+.line-reveal {
+  overflow: hidden;
+}
+.line-reveal .line-inner {
+  display: block;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform .8s cubic-bezier(.16,1,.3,1), opacity .8s cubic-bezier(.16,1,.3,1);
+}
+.line-reveal.revealed .line-inner {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ── MAGNETIC BUTTONS ── */
+.magnetic { transition: transform .3s cubic-bezier(.16,1,.3,1); }
+
+/* ── HORIZONTAL SCROLL SECTION ── */
+.horizontal-section {
+  overflow: hidden;
+  position: relative;
+}
+.horizontal-track {
+  display: flex; gap: 32px;
+  width: max-content;
+  padding: 0 32px;
 }
 :root {
   --bg: #f5f0eb;
@@ -38,32 +89,29 @@
   --font-mono: 'JetBrains Mono', monospace;
   --ease: cubic-bezier(0.16,1,0.3,1);
 }
-html { scroll-behavior: smooth; background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
-body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; }
+html { background: var(--bg); color: var(--text-primary); font-family: var(--font-body); -webkit-font-smoothing: antialiased; }
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+body { overflow-x: hidden; line-height: 1.6; min-height: 100vh; background: var(--bg); }
 main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 1; }
 
 /* ── VIDEO BACKGROUND (hero only) ── */
-.hero { position: relative; overflow: hidden; }
-.hero-video-bg {
-  position: absolute; inset: 0; z-index: 0;
+#hero-waves {
+  position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0;
+  will-change: transform;
+  image-rendering: auto;
 }
-.hero-video-bg video {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%; object-fit: cover; opacity: 0;
-  filter: saturate(1.2) contrast(1.1) brightness(0.9);
+/* ── HERO OVERLAYS ── */
+.hero-fade-bottom {
+  position: absolute; bottom: 0; left: 0; right: 0; height: 200px; z-index: 2; pointer-events: none;
+  background: linear-gradient(to bottom, transparent 0%, var(--bg) 100%);
 }
-/* Red color grade overlay */
-.hero-video-bg::before {
+#hero-waves + .hero-vignette::before {
   content: ''; position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(135deg, rgba(180,20,20,0.18) 0%, rgba(192,192,192,0.12) 50%, rgba(180,20,20,0.15) 100%);
   mix-blend-mode: multiply;
 }
-/* Bottom fade to page bg */
-.hero-video-bg::after {
-  content: ''; position: absolute; inset: 0; z-index: 2;
-  background: linear-gradient(to bottom, transparent 0%, transparent 50%, var(--bg) 100%);
-}
-/* Vignette edges */
 .hero-vignette {
   position: absolute; inset: 0; z-index: 1; pointer-events: none;
   box-shadow: inset 0 0 150px 60px rgba(0,0,0,0.25);
@@ -105,19 +153,18 @@ main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 
 .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
 
 /* ── HERO ── text only, flush left edge */
-.hero { padding-top: 160px; padding-bottom: 80px; min-height: 90vh; display: flex; align-items: center; }
+.hero { position: relative; overflow: hidden; padding-top: 160px; padding-bottom: 80px; min-height: 90vh; display: flex; align-items: center; }
+.hero .container { position: relative; z-index: 3; }
 .hero .container { max-width: 100%; margin: 0; padding: 0 32px 0 12px !important; }
-.hero-h1 { font-family: var(--font-display); font-size: clamp(36px,5vw,72px); font-weight: 700; line-height: 1.08; letter-spacing: -2.5px; color: var(--text-primary); margin-bottom: 24px; max-width: 850px; }
-.hero-h1 .line { display: block; opacity: 0; transform: translateY(50px); animation: stag 1s var(--ease) forwards; }
-.hero-h1 .line:nth-child(1) { animation-delay: .3s } .hero-h1 .line:nth-child(2) { animation-delay: .5s } .hero-h1 .line:nth-child(3) { animation-delay: .7s }
+.hero-h1 { font-family: var(--font-display); font-size: clamp(36px,5vw,72px); font-weight: 700; line-height: 1.08; letter-spacing: -2.5px; color: #fff; margin-bottom: 24px; max-width: 850px; text-shadow: 0 4px 24px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.8); }
+.hero-h1 .line { display: block; }
 .accent { color: var(--red); }
-@keyframes stag { to { opacity: 1; transform: translateY(0) } }
-.hero-sub { font-size: 15px; line-height: 1.65; color: var(--text-secondary); max-width: 520px; margin-bottom: 28px; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) .85s forwards; }
-.hero-ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; opacity: 0; transform: translateY(20px); animation: stag .8s var(--ease) 1s forwards; }
-.btn-solid { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
+.hero-sub { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.92); max-width: 520px; margin-bottom: 28px; text-shadow: 0 2px 14px rgba(0,0,0,0.7); }
+.hero-ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
+.btn-solid { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #1a1715; font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
 .btn-solid:hover { background: var(--red); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 30px var(--red-glow); }
-.btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--text-primary); border: 1.5px solid var(--border); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 13px 24px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
-.btn-outline:hover { border-color: var(--text-primary); background: rgba(0,0,0,.03); }
+.btn-outline { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,.3); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 13px 24px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
+.btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.1); }
 
 /* Feed header inside hero */
 /* Feed header marquee */
@@ -238,7 +285,6 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
   .hero-h1 { font-size: clamp(26px, 8vw, 38px); letter-spacing: -1.5px; line-height: 1.15; margin-bottom: 16px; }
   .hero-sub { font-size: 14px; line-height: 1.6; margin-bottom: 24px; }
   .btn-solid, .btn-outline { font-size: 13px; padding: 12px 22px; }
-  .hero-video-bg video { opacity: 0.6; }
   .mission-img-wrap { height: 35vh; }
   .mission-content { padding: 32px 20px; }
   .mission-content h3 { font-size: 22px; }
@@ -270,9 +316,6 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 </head>
 <body>
 
-<!-- 3D Vortex Background -->
-<canvas id="bg-canvas"></canvas>
-
 <!-- TOP BAR -->
 <header class="top-header">
   <div class="header-container">
@@ -296,25 +339,23 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 
   <!-- ═══ HERO ═══ -->
   <section class="hero">
-    <div class="hero-video-bg">
-      <video id="vid-a" muted playsinline>
-        <source src="assets/hero-bg.mp4" type="video/mp4">
-      </video>
-      <video id="vid-b" muted playsinline>
-        <source src="assets/hero-bg.mp4" type="video/mp4">
-      </video>
-    </div>
+    <canvas id="hero-waves"></canvas>
     <div class="hero-vignette"></div>
+    <div class="hero-fade-bottom"></div>
     <div class="container">
-      <h1 class="hero-h1">
+      <h1 class="hero-h1 word-reveal">
         <span class="line">We tear apart GPUs,</span>
         <span class="line">dissect AI models,</span>
         <span class="line">and explain them <span class="accent">from scratch.</span></span>
       </h1>
-      <p class="hero-sub">Independent research straight from source code and research papers. No sponsors. No hype. No fluff.</p>
-      <div class="hero-ctas">
-        <a href="#feed" class="btn-solid">Explore Breakdowns <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
-        <a href="#mission" class="btn-outline">Our Mission</a>
+      <div class="line-reveal">
+        <p class="hero-sub line-inner">Independent research straight from source code and research papers. No sponsors. No hype. No fluff.</p>
+      </div>
+      <div class="line-reveal" style="transition-delay:.15s">
+        <div class="hero-ctas line-inner">
+        <a href="#feed" class="btn-solid magnetic">Explore Breakdowns <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+        <a href="#mission" class="btn-outline magnetic">Our Mission</a>
+        </div>
       </div>
     </div>
   </section>
@@ -351,7 +392,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 
     <div class="mission-block">
       <div class="mission-content rv-left">
-        <h3>Breaking news, verified.</h3>
+        <h3 class="word-reveal">Breaking news, verified.</h3>
         <p>When a new AI model drops or a rogue agent goes haywire, we break it down within hours&thinsp;&mdash;&thinsp;with sources, not speculation.</p>
       </div>
       <div class="mission-img-wrap rv-scale">
@@ -361,7 +402,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 
     <div class="mission-block reverse">
       <div class="mission-content rv-right">
-        <h3>Hardware, explained like you're&nbsp;12.</h3>
+        <h3 class="word-reveal">Hardware, explained like you're&nbsp;12.</h3>
         <p>CPUs, GPUs, SSDs, RAM&thinsp;&mdash;&thinsp;we explain how your computer actually works using real benchmarks and diagrams, not marketing slides.</p>
       </div>
       <div class="mission-img-wrap rv-scale">
@@ -371,7 +412,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 
     <div class="mission-block">
       <div class="mission-content rv-left">
-        <h3>AI without the buzzwords.</h3>
+        <h3 class="word-reveal">AI without the buzzwords.</h3>
         <p>Neural networks, transformers, prompt engineering&thinsp;&mdash;&thinsp;explained so clearly your grandma could follow along.</p>
       </div>
       <div class="mission-img-wrap rv-scale">
@@ -386,7 +427,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 <!-- ═══ MANIFESTO ═══ -->
 <section class="manifesto-wrap" id="manifesto">
   <div class="manifesto-box rv-scale">
-    <h2 class="manifesto-title">Our only rule.</h2>
+    <h2 class="manifesto-title word-reveal">Our only rule.</h2>
     <p class="manifesto-desc">If we can't explain it simply, we don't understand it well enough. Every post is built from primary sources&thinsp;&mdash;&thinsp;research papers, official docs, and hands-on testing.</p>
     <a href="https://www.instagram.com/slatecore/" target="_blank" rel="noopener" class="btn-inv">Follow @slatecore on Instagram &rarr;</a>
   </div>
@@ -407,13 +448,66 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 </footer>
 
 <!-- ═══ ENGINE ═══ -->
+<!-- Lenis Smooth Scroll -->
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
 <script src="posts-data.js?v=2"></script>
 <script>
+// ── Lenis Smooth Scroll ──
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smoothWheel: true,
+});
+function raf(time) {
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
+requestAnimationFrame(raf);
+
+// ── Word Reveal (split text into words) ──
+document.querySelectorAll('.word-reveal').forEach(el => {
+  const text = el.innerHTML;
+  // Preserve HTML tags like <span class="accent">
+  const words = text.split(/(\s+)/);
+  let html = '';
+  let inTag = false;
+  let tagBuffer = '';
+  words.forEach(word => {
+    if (word.includes('<')) inTag = true;
+    if (inTag) {
+      tagBuffer += word;
+      if (word.includes('>') && !word.includes('</')) {
+        // Opening tag found but not closing
+      }
+      if (tagBuffer.includes('</') && tagBuffer.lastIndexOf('>') > tagBuffer.lastIndexOf('</')) {
+        inTag = false;
+        html += `<span class="word"><span class="word-inner">${tagBuffer}</span></span> `;
+        tagBuffer = '';
+      }
+    } else if (word.trim()) {
+      html += `<span class="word"><span class="word-inner">${word}</span></span> `;
+    }
+  });
+  if (tagBuffer) html += tagBuffer;
+  el.innerHTML = html;
+});
+
 // ── Scroll Reveal (IntersectionObserver) ──
 const rvObs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
 }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
 document.querySelectorAll('.rv,.rv-left,.rv-right,.rv-scale').forEach(el => rvObs.observe(el));
+
+// ── Word/Line Reveal Observer ──
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('revealed');
+      revealObs.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.2, rootMargin: '0px 0px -50px 0px' });
+document.querySelectorAll('.word-reveal, .line-reveal').forEach(el => revealObs.observe(el));
 
 // ── Counter Animation ──
 const cObs = new IntersectionObserver(entries => {
@@ -437,11 +531,21 @@ function updateParallax() {
     img.style.transform = `translateY(${offset}px)`;
   });
 }
-let ticking = false;
-window.addEventListener('scroll', () => {
-  if (!ticking) { requestAnimationFrame(() => { updateParallax(); ticking = false; }); ticking = true; }
-}, { passive: true });
+lenis.on('scroll', updateParallax);
 updateParallax();
+
+// ── Magnetic Buttons ──
+document.querySelectorAll('.magnetic').forEach(btn => {
+  btn.addEventListener('mousemove', e => {
+    const rect = btn.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    btn.style.transform = `translate(${x * 0.3}px, ${y * 0.3}px)`;
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = '';
+  });
+});
 
 // ── Render Posts (vertical grid + scroll reveal per card) ──
 function renderPosts(cat) {
@@ -463,7 +567,6 @@ function renderPosts(cat) {
       </div>
     </article>
   `).join('');
-  // Observe new cards for scroll reveal - trigger immediately for visible ones
   c.querySelectorAll('.rv').forEach(el => rvObs.observe(el));
 }
 function filterPosts(cat, btn) {
@@ -491,105 +594,146 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     requestAnimationFrame(marqueeTick);
   }
-
-  // Dual-video seamless crossfade loop
-  const vA = document.getElementById('vid-a');
-  const vB = document.getElementById('vid-b');
-  if (!vA || !vB) return;
-
-  const maxOp = 0.75;
-  const fade = 2.5; // crossfade duration in seconds
-  let active = vA, standby = vB;
-
-  function startLoop() {
-    active.currentTime = 0;
-    active.play();
-    active.style.opacity = String(maxOp);
-    standby.style.opacity = '0';
-    standby.pause();
-  }
-
-  vA.addEventListener('loadeddata', () => { if (vB.readyState >= 2) startLoop(); });
-  vB.addEventListener('loadeddata', () => { if (vA.readyState >= 2) startLoop(); });
-  vA.load(); vB.load();
-
-  const tick = () => {
-    if (active.duration && active.currentTime > 0) {
-      const left = active.duration - active.currentTime;
-      if (left <= fade) {
-        // Fade out active, fade in standby
-        const progress = 1 - (left / fade);
-        active.style.opacity = String((1 - progress) * maxOp);
-        if (standby.paused) {
-          standby.currentTime = 0;
-          standby.play();
-        }
-        standby.style.opacity = String(progress * maxOp);
-      }
-    }
-    requestAnimationFrame(tick);
-  };
-  requestAnimationFrame(tick);
-
-  // Swap roles when active ends
-  function swap(ended) {
-    const temp = active;
-    active = standby;
-    standby = temp;
-    active.style.opacity = String(maxOp);
-    standby.style.opacity = '0';
-    standby.pause();
-  }
-  vA.addEventListener('ended', swap);
-  vB.addEventListener('ended', swap);
 });
 </script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 <script>
 gsap.registerPlugin(ScrollTrigger);
-const bgCanvas = document.querySelector('#bg-canvas');
-if (bgCanvas) {
-  const isMobile = innerWidth < 768;
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(45, innerWidth / innerHeight, 0.1, 1000);
-  camera.position.z = 14;
-  const renderer = new THREE.WebGLRenderer({ canvas: bgCanvas, alpha: true, antialias: !isMobile });
-  renderer.setSize(innerWidth, innerHeight);
-  renderer.setPixelRatio(isMobile ? 1 : Math.min(devicePixelRatio, 2));
 
-  scene.add(new THREE.AmbientLight(0xffffff, 0.8));
-  const d1 = new THREE.DirectionalLight(0xffffff, 1.2);
-  d1.position.set(5, 10, 7);
-  scene.add(d1);
+// Sync Lenis with GSAP ScrollTrigger
+lenis.on('scroll', ScrollTrigger.update);
+gsap.ticker.add((time) => { lenis.raf(time * 1000); });
+gsap.ticker.lagSmoothing(0);
 
-  const spiral = new THREE.Mesh(
-    new THREE.TorusKnotGeometry(3, 0.75, isMobile ? 64 : 150, isMobile ? 10 : 20, 2, 5),
-    new THREE.MeshStandardMaterial({ color: 0xefefef, roughness: 0.3, metalness: 0.05 })
-  );
-  scene.add(spiral);
+// ── GSAP Scroll Animations ──
+// Navbar hide/show on scroll
+const header = document.querySelector('.top-header');
+let lastScroll = 0;
+lenis.on('scroll', ({scroll}) => {
+  if (scroll > 100 && scroll > lastScroll) {
+    header.style.transform = 'translateY(-100%)';
+    header.style.transition = 'transform .4s cubic-bezier(.16,1,.3,1)';
+  } else {
+    header.style.transform = 'translateY(0)';
+    header.style.transition = 'transform .4s cubic-bezier(.16,1,.3,1)';
+  }
+  lastScroll = scroll;
+});
 
-  gsap.to(spiral.rotation, {
-    z: Math.PI * 2.5, x: Math.PI * 0.75, y: Math.PI * 0.5,
-    scrollTrigger: { trigger: "body", start: "top top", end: "bottom bottom", scrub: 1.5 }
+// Mission images scale on scroll
+document.querySelectorAll('.mission-img-wrap').forEach(wrap => {
+  gsap.fromTo(wrap, { scale: 0.88, opacity: 0.5 }, {
+    scale: 1, opacity: 1,
+    scrollTrigger: { trigger: wrap, start: 'top 85%', end: 'top 30%', scrub: 1 }
   });
-  gsap.to(spiral.position, { y: 0.25, duration: 2.5, repeat: -1, yoyo: true, ease: "sine.inOut" });
+});
 
-  let needsRender = true;
-  gsap.ticker.add(() => { needsRender = true; });
-  (function anim() {
-    requestAnimationFrame(anim);
-    if (needsRender) { renderer.render(scene, camera); needsRender = false; }
-  })();
-
-  addEventListener('resize', () => {
-    camera.aspect = innerWidth / innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(innerWidth, innerHeight);
-    needsRender = true;
+// Mission text slide in
+document.querySelectorAll('.mission-content').forEach((content, i) => {
+  const dir = i % 2 === 0 ? -80 : 80;
+  gsap.fromTo(content, { x: dir, opacity: 0 }, {
+    x: 0, opacity: 1,
+    scrollTrigger: { trigger: content, start: 'top 80%', end: 'top 40%', scrub: 1 }
   });
+});
+
+// Manifesto box scale in
+gsap.fromTo('.manifesto-box', { scale: 0.9, opacity: 0.6 }, {
+  scale: 1, opacity: 1,
+  scrollTrigger: { trigger: '.manifesto-box', start: 'top 80%', end: 'top 40%', scrub: 1 }
+});
+
+// ── Hero Waves Background (WebGL — GPU rendered, no lag) ──
+(() => {
+  const canvas = document.getElementById('hero-waves');
+  if (!canvas) return;
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+
+  function resize() {
+    const dpr = Math.min(devicePixelRatio, 1.5);
+    canvas.width = canvas.clientWidth * dpr;
+    canvas.height = canvas.clientHeight * dpr;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+  }
+  resize();
+  addEventListener('resize', resize);
+
+  const vs = `attribute vec2 p;void main(){gl_Position=vec4(p,0,1);}`;
+  const fs = `
+precision mediump float;
+uniform float t;
+uniform vec2 r;
+
+float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
+float noise(vec2 p){
+  vec2 i=floor(p),f=fract(p);
+  f=f*f*(3.0-2.0*f);
+  return mix(mix(hash(i),hash(i+vec2(1,0)),f.x),
+             mix(hash(i+vec2(0,1)),hash(i+vec2(1,1)),f.x),f.y);
 }
+float fbm(vec2 p){
+  float v=0.0;v+=0.5*noise(p);v+=0.25*noise(p*2.1);v+=0.125*noise(p*4.3);
+  return v;
+}
+void main(){
+  vec2 uv=gl_FragCoord.xy/r;
+  float spd=t*0.6;
+  float w1=fbm(uv*vec2(4.0,3.0)+vec2(spd*0.5,spd*0.35));
+  float w2=fbm(uv*vec2(6.0,5.0)-vec2(spd*0.3,spd*0.2));
+  float v=w1*0.6+w2*0.4;
+  float ridge=abs(sin(v*18.85+spd*2.5))*0.38;
+  float val=smoothstep(0.18,0.72,v*0.65+ridge*0.45);
+  // Dominant cream vanilla (#EFE6DE) with deep red (#9A0002)
+  vec3 c0=vec3(0.05,0.01,0.01);
+  vec3 c1=vec3(0.604,0.0,0.008);
+  vec3 c2=vec3(0.85,0.58,0.50);
+  vec3 c3=vec3(0.937,0.902,0.871);
+  vec3 c4=vec3(0.98,0.96,0.93);
+  vec3 col;
+  if(val<0.22){col=mix(c0,c1,val/0.22);}
+  else if(val<0.48){col=mix(c1,c2,(val-0.22)/0.26);}
+  else if(val<0.78){col=mix(c2,c3,(val-0.48)/0.30);}
+  else{col=mix(c3,c4,(val-0.78)/0.22);}
+  vec2 d=uv-0.5;
+  float vig=1.0-dot(d,d)*1.2;
+  col*=clamp(vig,0.65,1.0);
+  gl_FragColor=vec4(col,1.0);
+}`;
+
+  function compile(src, type) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+  const prog = gl.createProgram();
+  gl.attachShader(prog, compile(vs, gl.VERTEX_SHADER));
+  gl.attachShader(prog, compile(fs, gl.FRAGMENT_SHADER));
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1,1,-1,-1,1,1,1]), gl.STATIC_DRAW);
+  const pLoc = gl.getAttribLocation(prog, 'p');
+  gl.enableVertexAttribArray(pLoc);
+  gl.vertexAttribPointer(pLoc, 2, gl.FLOAT, false, 0, 0);
+
+  const tLoc = gl.getUniformLocation(prog, 't');
+  const rLoc = gl.getUniformLocation(prog, 'r');
+
+  const start = performance.now();
+  function draw() {
+    const t = (performance.now() - start) / 1000;
+    gl.uniform1f(tLoc, t);
+    gl.uniform2f(rLoc, canvas.width, canvas.height);
+    gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
 </script>
 </body>
 </html>
