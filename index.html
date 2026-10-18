@@ -156,10 +156,10 @@ main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 
 .hero { position: relative; overflow: hidden; padding-top: 160px; padding-bottom: 80px; min-height: 90vh; display: flex; align-items: center; }
 .hero .container { position: relative; z-index: 3; }
 .hero .container { max-width: 100%; margin: 0; padding: 0 32px 0 12px !important; }
-.hero-h1 { font-family: var(--font-display); font-size: clamp(36px,5vw,72px); font-weight: 700; line-height: 1.08; letter-spacing: -2.5px; color: #fff; margin-bottom: 24px; max-width: 850px; text-shadow: 0 4px 24px rgba(0,0,0,0.55), 0 1px 3px rgba(0,0,0,0.8); }
+.hero-h1 { font-family: var(--font-display); font-size: clamp(36px,5vw,72px); font-weight: 700; line-height: 1.08; letter-spacing: -2.5px; color: #fff; margin-bottom: 24px; max-width: 850px; }
 .hero-h1 .line { display: block; }
 .accent { color: var(--red); }
-.hero-sub { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.92); max-width: 520px; margin-bottom: 28px; text-shadow: 0 2px 14px rgba(0,0,0,0.7); }
+.hero-sub { font-size: 15px; line-height: 1.65; color: rgba(255,255,255,.7); max-width: 520px; margin-bottom: 28px; }
 .hero-ctas { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .btn-solid { display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #1a1715; font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 14px 28px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
 .btn-solid:hover { background: var(--red); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 30px var(--red-glow); }
@@ -683,22 +683,22 @@ void main(){
   float w1=fbm(uv*vec2(4.0,3.0)+vec2(spd*0.5,spd*0.35));
   float w2=fbm(uv*vec2(6.0,5.0)-vec2(spd*0.3,spd*0.2));
   float v=w1*0.6+w2*0.4;
-  float ridge=abs(sin(v*18.85+spd*2.5))*0.38;
-  float val=smoothstep(0.18,0.72,v*0.65+ridge*0.45);
-  // Dominant cream vanilla (#EFE6DE) with deep red (#9A0002)
-  vec3 c0=vec3(0.05,0.01,0.01);
+  float ridge=abs(sin(v*18.85+spd*2.5))*0.35;
+  v=v*0.6+ridge*0.4;
+  float intensity=pow(v,1.6);
+  // Color gradient: #000000 -> #9A0002 -> mix -> #EFE6DE
+  vec3 c0=vec3(0.0,0.0,0.0);
   vec3 c1=vec3(0.604,0.0,0.008);
-  vec3 c2=vec3(0.85,0.58,0.50);
+  vec3 c2=vec3(0.8,0.45,0.35);
   vec3 c3=vec3(0.937,0.902,0.871);
-  vec3 c4=vec3(0.98,0.96,0.93);
+  float val=clamp(intensity+ridge*0.3,0.0,1.0);
   vec3 col;
-  if(val<0.22){col=mix(c0,c1,val/0.22);}
-  else if(val<0.48){col=mix(c1,c2,(val-0.22)/0.26);}
-  else if(val<0.78){col=mix(c2,c3,(val-0.48)/0.30);}
-  else{col=mix(c3,c4,(val-0.78)/0.22);}
+  if(val<0.33){col=mix(c0,c1,val/0.33);}
+  else if(val<0.66){col=mix(c1,c2,(val-0.33)/0.33);}
+  else{col=mix(c2,c3,(val-0.66)/0.34);}
   vec2 d=uv-0.5;
-  float vig=1.0-dot(d,d)*1.2;
-  col*=clamp(vig,0.65,1.0);
+  float vig=1.0-dot(d,d)*1.8;
+  col*=clamp(vig,0.3,1.0);
   gl_FragColor=vec4(col,1.0);
 }`;
 
