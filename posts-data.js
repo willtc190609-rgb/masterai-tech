@@ -1,9 +1,23 @@
 // =============================================================================
 // SLATE CORE (SLTC) — INSTAGRAM FEED & DATA REGISTRY
-// All 13 posts with cover images & direct IG links
+// All 14 posts with cover images & direct IG links
 // =============================================================================
 
 const MASTERAI_POSTS = [
+  {
+    id: "post-015",
+    number: "POST #015",
+    category: "fundamentals",
+    categoryName: "HALLOWEEN",
+    title: "Happy Halloween 🎃",
+    description: "Stay curious. Stay spooky. Don't let AI hallucinations haunt your code. Happy Halloween from the Slate Core team.",
+    image: "assets/covers/cover-post-015.png",
+    date: "Oct 31, 2026",
+    slidesCount: 1,
+    igLink: "https://www.instagram.com/p/DfLwMY-AWLx/",
+    tags: ["Halloween", "HappyHalloween", "SlateCore", "Tech"],
+    accentColor: "#ea580c"
+  },
   {
     id: "post-013",
     number: "POST #013",
