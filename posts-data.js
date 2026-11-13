@@ -1,9 +1,23 @@
 // =============================================================================
 // SLATE CORE (SLTC) — INSTAGRAM FEED & DATA REGISTRY
-// All 14 posts with cover images & direct IG links
+// All 15 posts with cover images & direct IG links
 // =============================================================================
 
 const MASTERAI_POSTS = [
+  {
+    id: "post-016",
+    number: "POST #016",
+    category: "ai-news",
+    categoryName: "BREAKING NEWS",
+    title: "Jensen Huang Out at Nvidia",
+    description: "The man who co-founded Nvidia 33 years ago and built it into a $4 trillion AI empire has resigned as CEO — effective immediately.",
+    image: "assets/covers/cover-post-016.png",
+    date: "Nov 13, 2026",
+    slidesCount: 3,
+    igLink: "https://www.instagram.com/p/DfrpZvHI8mk/",
+    tags: ["JensenHuang", "Nvidia", "NVDA", "BreakingNews", "AI", "TechNews"],
+    accentColor: "#dc2626"
+  },
   {
     id: "post-015",
     number: "POST #015",
