@@ -41,7 +41,11 @@
     "@type": "Organization",
     "name": "Slate Core",
     "url": "https://www.instagram.com/slatecore/"
-  }
+  },
+  "sameAs": [
+    "https://www.instagram.com/slatecore/",
+    "https://www.linkedin.com/in/william-andrew-huang-4b3116448/"
+  ]
 }
 </script>
 <link rel="icon" type="image/png" href="assets/sltc-logo.png">
@@ -186,6 +190,8 @@ main, footer, .hero-feed-header, .manifesto-wrap { position: relative; z-index: 
 .nav-btn:hover { color: var(--text-primary); background: rgba(0,0,0,0.04); }
 .ig-action-btn { display: inline-flex; align-items: center; gap: 8px; background: var(--text-primary); color: var(--bg); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 10px 24px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
 .ig-action-btn:hover { background: var(--red); color: #fff; transform: translateY(-1px); box-shadow: 0 8px 24px var(--red-glow); }
+.li-action-btn { display: inline-flex; align-items: center; gap: 7px; background: transparent; color: var(--text-secondary); border: 1.5px solid var(--border); font-family: var(--font-body); font-size: 14px; font-weight: 600; text-decoration: none; padding: 8.5px 20px; border-radius: var(--radius-pill); transition: all .3s var(--ease); }
+.li-action-btn:hover { background: #0a66c2; border-color: #0a66c2; color: #fff; transform: translateY(-1px); box-shadow: 0 8px 24px rgba(10,102,194,.22); }
 
 .container { max-width: 1280px; margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
 
@@ -296,6 +302,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
 .foot-2 { display: flex; justify-content: space-between; align-items: center; padding-top: 14px; border-top: 1px solid var(--border-light); font-family: var(--font-mono); font-size: 12px; color: var(--text-muted); flex-wrap: wrap; gap: 12px; }
 .foot-2 a { color: var(--text-secondary); text-decoration: none; transition: color .2s; }
 .foot-2 a:hover { color: var(--text-primary); }
+.foot-social { display: inline-flex; gap: 16px; }
 
 /* ── REDUCED MOTION (accessibility) ── */
 @media (prefers-reduced-motion: reduce) {
@@ -382,6 +389,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
       <a href="#manifesto" class="nav-btn">About</a>
     </nav>
     <a href="https://www.instagram.com/slatecore/" target="_blank" rel="noopener" class="ig-action-btn">Follow on IG &rarr;</a>
+    <a href="https://www.linkedin.com/in/william-andrew-huang-4b3116448/" target="_blank" rel="noopener" class="li-action-btn">LinkedIn &rarr;</a>
   </div>
 </header>
 
@@ -480,6 +488,7 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
     <h2 class="manifesto-title word-reveal">Our only rule.</h2>
     <p class="manifesto-desc">If we can't explain it simply, we don't understand it well enough. Every post is built from primary sources&thinsp;&mdash;&thinsp;research papers, official docs, and hands-on testing.</p>
     <a href="https://www.instagram.com/slatecore/" target="_blank" rel="noopener" class="btn-inv">Follow @slatecore on Instagram &rarr;</a>
+    <a href="https://www.linkedin.com/in/william-andrew-huang-4b3116448/" target="_blank" rel="noopener" class="btn-inv" style="margin-left:10px;background:transparent;color:var(--bg);border:1.5px solid rgba(245,240,235,.3)">Connect on LinkedIn &rarr;</a>
   </div>
 </section>
 
@@ -492,7 +501,10 @@ footer { padding: 40px 0; border-top: 1px solid var(--border); }
     </div>
     <div class="foot-2">
       <span>&copy; 2026 Slate Core. All research and visual breakdowns independent.</span>
-      <a href="https://www.instagram.com/slatecore/" target="_blank" rel="noopener">Instagram &rarr;</a>
+      <span class="foot-social">
+        <a href="https://www.instagram.com/slatecore/" target="_blank" rel="noopener">Instagram &rarr;</a>
+        <a href="https://www.linkedin.com/in/william-andrew-huang-4b3116448/" target="_blank" rel="noopener">LinkedIn &rarr;</a>
+      </span>
     </div>
   </div>
 </footer>
