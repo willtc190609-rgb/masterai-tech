@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://willtc190609-rgb.github.io/masterai-tech/sitemap.xml
