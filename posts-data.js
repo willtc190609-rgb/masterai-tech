@@ -1,9 +1,23 @@
 // =============================================================================
 // SLATE CORE (SLTC) — INSTAGRAM FEED & DATA REGISTRY
-// All 15 posts with cover images & direct IG links
+// All 16 posts with cover images & direct IG links
 // =============================================================================
 
 const MASTERAI_POSTS = [
+  {
+    id: "post-017",
+    number: "POST #017",
+    category: "tools",
+    categoryName: "SELF-HOSTING GUIDE",
+    title: "Why You Need a Home Server in 2026",
+    description: "Your data, your rules. No subscriptions, no cloud bills, no Big Tech watching. Here's how to start for under $200.",
+    image: "assets/covers/cover-post-017.png",
+    date: "Nov 13, 2026",
+    slidesCount: 3,
+    igLink: "https://www.instagram.com/p/DftT0dWo7Of/",
+    tags: ["HomeServer", "SelfHosting", "Privacy", "Homelab"],
+    accentColor: "#3b82f6"
+  },
   {
     id: "post-016",
     number: "POST #016",
