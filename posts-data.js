@@ -13,7 +13,7 @@ const MASTERAI_POSTS = [
     description: "Open-weight models caught up, quantization cut memory by 75%, and consumer hardware got fast enough. How to run AI on your own machine — and what it actually costs.",
     image: "assets/covers/cover-post-018.webp",
     date: "Nov 23, 2026",
-    slidesCount: 4,
+    slidesCount: 5,
     igLink: "https://www.instagram.com/slatecore/",
     tags: ["LocalAI", "Ollama", "LLM", "OpenSource", "SelfHosting"],
     accentColor: "#3b82f6"
