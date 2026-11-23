@@ -14,7 +14,7 @@ const MASTERAI_POSTS = [
     image: "assets/covers/cover-post-018.webp",
     date: "Nov 23, 2026",
     slidesCount: 5,
-    igLink: "https://www.instagram.com/slatecore/",
+    igLink: "https://www.instagram.com/p/DgFrzsCI8xf/",
     tags: ["LocalAI", "Ollama", "LLM", "OpenSource", "SelfHosting"],
     accentColor: "#3b82f6"
   },
