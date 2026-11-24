@@ -1,6 +1,6 @@
 // =============================================================================
 // SLATE CORE (SLTC) — INSTAGRAM FEED & DATA REGISTRY
-// All 16 posts with cover images & direct IG links
+// All 18 posts with cover images & direct IG links
 // =============================================================================
 
 const MASTERAI_POSTS = [
@@ -14,7 +14,7 @@ const MASTERAI_POSTS = [
     image: "assets/covers/cover-post-019.webp",
     date: "Nov 24, 2026",
     slidesCount: 5,
-    igLink: "https://www.instagram.com/slatecore/",
+    igLink: "https://www.instagram.com/p/DgIWHgPI9hj/",
     tags: ["AITimeline", "AIHistory", "LLM", "OpenSource", "LocalAI"],
     accentColor: "#dc2626"
   },
