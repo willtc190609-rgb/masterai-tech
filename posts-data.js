@@ -5,6 +5,20 @@
 
 const MASTERAI_POSTS = [
   {
+    id: "post-019",
+    number: "POST #019",
+    category: "fundamentals",
+    categoryName: "AI TIMELINE",
+    title: "From GPT-3 to Your Laptop",
+    description: "Six years of AI progress in one timeline. Scale, open weights, reasoning, and agents — what actually changed, and when.",
+    image: "assets/covers/cover-post-019.webp",
+    date: "Nov 24, 2026",
+    slidesCount: 5,
+    igLink: "https://www.instagram.com/slatecore/",
+    tags: ["AITimeline", "AIHistory", "LLM", "OpenSource", "LocalAI"],
+    accentColor: "#dc2626"
+  },
+  {
     id: "post-018",
     number: "POST #018",
     category: "fundamentals",
