@@ -1,9 +1,23 @@
 // =============================================================================
 // SLATE CORE (SLTC) — INSTAGRAM FEED & DATA REGISTRY
-// All 18 posts with cover images & direct IG links
+// All 19 posts with cover images & direct IG links
 // =============================================================================
 
 const MASTERAI_POSTS = [
+  {
+    id: "post-020",
+    number: "POST #020",
+    category: "fundamentals",
+    categoryName: "DATA CENTER",
+    title: "Inside an AI Data Center",
+    description: "Compute, network, power. The three things that actually decide what AI can do, and why the building is harder than the model.",
+    image: "assets/covers/cover-post-020.webp",
+    date: "Nov 28, 2026",
+    slidesCount: 5,
+    igLink: "https://www.instagram.com/slatecore/",
+    tags: ["DataCenter", "GPU", "AIInfrastructure", "H100", "LiquidCooling"],
+    accentColor: "#dc2626"
+  },
   {
     id: "post-019",
     number: "POST #019",
